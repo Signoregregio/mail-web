@@ -1,0 +1,6 @@
+<div *ngFor="let item of folderList.list">
+  <div ngClass="{'folderSelected' : ($index == selectedFolder) }">{{ item.index }} - {{ item.name }}</div>
+</div>
+<!-- <div *ngFor="let item of folderList.custom">
+  {{ item.index }} - {{ item.name }}
+</div> -->

@@ -8,6 +8,7 @@ import { MessageViewerComponent } from './components/message-viewer/message-view
 import { MailViewComponent } from './mail-view/mail-view.component';
 import { MessageListComponent } from './components/message-list/message-list.component';
 import { CommonStarComponent } from './components/common-star/common-star.component';
+import { FolderListComponent } from './folder-list/folder-list.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { CommonStarComponent } from './components/common-star/common-star.compon
     MessageViewerComponent,
     MailViewComponent,
     MessageListComponent,
-    CommonStarComponent
+    CommonStarComponent,
+    FolderListComponent
   ],
   imports: [
     BrowserModule,
