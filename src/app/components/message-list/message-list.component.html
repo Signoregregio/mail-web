@@ -1,4 +1,23 @@
-<div *ngFor="let message of messages">
-    {{message}}
+<h3>{{messages.length}} messages</h3>
+<button class ="btn" TODO="prev()">Prev <span class="glyphicon glyphicon-chevron-left"></span></button>
+<button class="btn" TODO>Next <span class="glyphicon glyphicon-chevron-right"></span></button>
+
+<div *ngFor="let message of mailService.messages;let $index = index" 
+    class="message" >
+    <!-- [ngClass]="{'message-selected' : message.selected, 
+               'message-list-odd' : $odd}"> -->
+
+    <!-- <div class="message-summary" 
+         [ngClass]="{'message-current' : $index == currentMessageIndex}"
+         TODO-set-current-on-click
+         > -->
+        <input type="checkbox" TODO="message.selected">
+        
+        <app-common-star [entity]="message.starred"></app-common-star>
+        
+        <span> {{$index}} From: {{message.from}}</span>
+        <span> {{message.subject}}</span>
+        <span class="align-right"> 10/03/2016 12:00</span><!-- TODO date formatted with filter -->
+    <!-- </div> -->
+    <div [hidden]="messages.length > 0">No results</div>
 </div>
-<div [hidden]="messages.length > 0">No results</div>

@@ -1,6 +1,29 @@
-<div *ngFor="let item of folderList.list">
-  <div ngClass="{'folderSelected' : ($index == selectedFolder) }">{{ item.index }} - {{ item.name }}</div>
-</div>
-<!-- <div *ngFor="let item of folderList.custom">
-  {{ item.index }} - {{ item.name }}
-</div> -->
+<h3>{{title}}</h3>
+<ul class="nav nav-pills nav-stacked">
+  <li
+    *ngFor="let item of folderList; let $index = index"
+    TODO
+    BIND
+    CLICK
+    EVENT="select(folder)"
+  >
+    <div
+      class="folder"
+      [ngClass]="{ 'folder-selected': item.index == currentFolder }"
+    >
+      {{ $index }} - {{ item.name }}
+    </div>
+  </li>
+  <li class="folder" *ngIf="allowCreate">
+    <form class="form-inline">
+      <input
+        class="form-control"
+        type="text"
+        name="newFolderName"
+        [(ngModel)]="newFolderName"
+      />
+      <button TODO-MANAGE-ADD>+</button>
+      {{ newFolderName }}
+    </form>
+  </li>
+</ul>

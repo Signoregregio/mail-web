@@ -1,10 +1,9 @@
 body {
     background-color: rgb(42, 42, 42);
-    color: rgb(240, 240, 240);
-    font-size: 36px;
+    color: green;
     font-family: sans-serif;
     margin: 0px; 
-
+    
 }
 
 section {

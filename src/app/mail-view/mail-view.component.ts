@@ -1,19 +1,23 @@
 import { Component, OnInit } from '@angular/core';
+import { FolderService } from '../services/folder.service';
 
 @Component({
   selector: 'app-mail-view',
   templateUrl: './mail-view.component.html',
-  styleUrls: ['./mail-view.component.css']
 })
 export class MailViewComponent implements OnInit {
 
-  constructor() { }
+  constructor(protected folderList : FolderService) { }
+
   messages : string[] = ['message1', 'message2']
-  
+  currentFolder: number = 0;
+  allowCreate: boolean;
+
+
   ngOnInit(): void {
   }
 
   onBtnPressed(value: any){
-    console.log(value)
+    console.log(this.folderList)
   }
 }

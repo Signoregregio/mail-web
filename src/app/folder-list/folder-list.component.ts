@@ -1,17 +1,27 @@
+import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
-import { FolderService } from 'src/app/services/folder.service';
-
 
 @Component({
   selector: 'app-folder-list',
   templateUrl: './folder-list.component.html',
 })
 export class FolderListComponent implements OnInit {
+  @Input()
+  public currentFolder: number;
+  @Input()
+  public allowCreate: boolean;
+  @Input()
+  public title: string;
+  @Input()
+  public folderList: any[];
+  
+  constructor() { }
 
-  constructor(protected folderList : FolderService) { }
 
+  newFolderName= '';
+  
   ngOnInit(): void {
-    console.log(this.folderList.list)
+    console.log(this.title)
   }
 
 }

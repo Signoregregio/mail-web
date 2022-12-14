@@ -26,11 +26,11 @@ export class FolderService {
 custom = [
   {
   name: "Angular",
-  index: 0,
+  index: 3,
 },
   {
   name: "Typescript",
-  index: 1,
+  index: 4,
 },
 ]
 

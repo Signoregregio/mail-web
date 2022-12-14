@@ -1,14 +1,68 @@
-<div>
-    <app-mail-logo>
+<div class="page-container">
+    
+    <header class="horizontal-container">
+        <app-mail-logo></app-mail-logo>
+<!--        
         
-    </app-mail-logo>
-    <section>
-        <app-message-list [messages]="messages" >
+        <search-panel class="horizontal-center"
+            default-query=" defaultQuery "
+            on-search-start = "search(query) "
+            >
+        </search-panel>
+        
+        <div class="right-align" ng-controller="AccountController as accountCtrl">
+            {{accountCtrl.accountEmail}}
+        </div>
+-->
+    </header>
 
-        </app-message-list>
-    </section>
-    <app-folder-list></app-folder-list>
-    <app-message-viewer (btnPressed)="onBtnPressed($event)" >
+    <section class="page-center horizontal-container">
+        <nav class="page-left-menu">
+            
+            <!-- <section class="compose-toolbar">
+                <button (click)="compose()" class="btn btn-danger">Compose</button>
+            </section> -->
+            
+            <section class="folder-list">
+                <app-folder-list [currentFolder]="currentFolder" [allowCreate]="false" title="Folder list" [folderList]="folderList.list" ></app-folder-list>
+            </section>
+            <section class="folder-list">
+                <app-folder-list [currentFolder]="currentFolder" [allowCreate]="true" title="Folder list" [folderList]="folderList.custom" ></app-folder-list>
+            </section>
+            <!-- <section class="folder-list">
+                <app-folder-list [currentFolder]="currentFolder" [allowCreate]="true"></app-folder-list>
+            </section> -->
+        </nav>
         
-    </app-message-viewer>
+        <!-- <section class="mail-composer horizontal-center "
+                    [hidden]="!composerActive"> -->
+            <!-- TODO3 migrate composer 
+            <message-composer 
+                BIND PROPERTIES AND EVENTS
+            >
+                
+            </message-composer> 
+            -->
+        <!-- </section>  -->
+                                            
+        <section class="horizontal-center vertical-container">
+            <app-message-list [messages]="messages" >
+
+            </app-message-list>
+            <div class="spacer">
+               
+                    <hr>                
+            </div>
+            <app-message-viewer (btnPressed)="onBtnPressed($event)" >
+        
+            </app-message-viewer>
+        </section>
+
+    </section>
+    
+    <footer> 
+        powered by Angular and <a href="http://www.nispro.it">NIS s.r.l.</a>
+        <br/>
+    </footer>
+    
 </div>
