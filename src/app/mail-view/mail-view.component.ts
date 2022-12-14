@@ -13,4 +13,7 @@ export class MailViewComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onBtnPressed(value: any){
+    console.log(value)
+  }
 }

@@ -11,10 +11,6 @@ export class MessageListComponent implements OnInit {
   @Input() 
   public messages : string[];
   
-  if (messages ){
-    console.log(messages)
-  }
-  
   ngOnInit(): void {
   }
 

@@ -3,10 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MailLogoComponent } from './mail-logo/mail-logo.component';
-import { MessageViewerComponent } from './mail-view/message-viewer/message-viewer.component';
+import { MailLogoComponent } from './components/mail-logo/mail-logo.component';
+import { MessageViewerComponent } from './components/message-viewer/message-viewer.component';
 import { MailViewComponent } from './mail-view/mail-view.component';
-import { MessageListComponent } from './mail-view/message-list/message-list.component';
+import { MessageListComponent } from './components/message-list/message-list.component';
+import { CommonStarComponent } from './components/common-star/common-star.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { MessageListComponent } from './mail-view/message-list/message-list.comp
     MailLogoComponent,
     MessageViewerComponent,
     MailViewComponent,
-    MessageListComponent
+    MessageListComponent,
+    CommonStarComponent
   ],
   imports: [
     BrowserModule,
