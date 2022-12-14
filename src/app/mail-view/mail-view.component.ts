@@ -8,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class MailViewComponent implements OnInit {
 
   constructor() { }
-
+  messages : string[] = ['message1', 'message2']
+  
   ngOnInit(): void {
   }
 

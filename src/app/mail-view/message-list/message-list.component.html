@@ -1,0 +1,4 @@
+<div *ngFor="let message of messages">
+    {{message}}
+</div>
+<div [hidden]="messages.length > 0">No results</div>
