@@ -11,6 +11,7 @@ import { CommonStarComponent } from './components/common-star/common-star.compon
 import { FolderListComponent } from './components/folder-list/folder-list.component';
 import { MailComposerComponent } from './components/mail-composer/mail-composer.component';
 import { MailVoidComponent } from './components/mail-void/mail-void.component';
+import { HighlightDirective } from './directive/highlight.directive';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { MailVoidComponent } from './components/mail-void/mail-void.component';
     CommonStarComponent,
     FolderListComponent,
     MailComposerComponent,
-    MailVoidComponent
+    MailVoidComponent,
+    HighlightDirective
   ],
   imports: [
     BrowserModule,

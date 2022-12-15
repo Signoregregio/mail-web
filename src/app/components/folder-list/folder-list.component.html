@@ -8,8 +8,9 @@
       [ngClass]="{ 'folder-selected': item.index == currentFolder }"
       [id]="item.index"
       [title]="item.name"
+      appHighlight = 'yellow'
     >
-      {{ $index }} - {{ item.name }}
+      {{ $index }} - {{ item.name }}  
     </div>
   </li>
   <li class="folder" *ngIf="allowCreate">
