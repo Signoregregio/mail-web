@@ -1,4 +1,4 @@
-import { Input } from '@angular/core';
+import { EventEmitter, Input, Output } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -14,14 +14,22 @@ export class FolderListComponent implements OnInit {
   public title: string;
   @Input()
   public folderList: any[];
-  
-  constructor() { }
+  @Output()
+  folderSelected = new EventEmitter<any>();
 
-
-  newFolderName= '';
-  
-  ngOnInit(): void {
-    console.log(this.title)
+  onFolderSelected(event: any){
+    let folderAttributes = {
+      id: event.target.id,
+      name: event.target.title
+    }
+    console.log(folderAttributes)
+    this.folderSelected.emit(folderAttributes)
   }
 
+  constructor() {}
+
+  newFolderName = '';
+
+  ngOnInit(): void {
+  }
 }

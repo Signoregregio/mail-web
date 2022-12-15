@@ -1,7 +1,6 @@
-import { Output } from '@angular/core';
+import { Input, Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
-import { MailService } from 'src/app/services/mail.service';
 
 @Component({
   selector: 'app-message-viewer',
@@ -11,6 +10,8 @@ export class MessageViewerComponent implements OnInit {
 
   @Output()
   btnPressed = new EventEmitter<any>();
+  @Input()
+  public messages: any[];
   // @Output()
   // forwardPressed = new EventEmitter<any>();
   // @Output()
@@ -19,13 +20,12 @@ export class MessageViewerComponent implements OnInit {
   currentMessageIndex = 0;
 
 
-  constructor(protected mailService : MailService) { }
+  constructor() { }
   
   onBtnPressed (event: any){
     this.btnPressed.emit(event.target.textContent)
   }
   
   ngOnInit(): void {
-    console.log(this.mailService.getMessages())
   }
 }

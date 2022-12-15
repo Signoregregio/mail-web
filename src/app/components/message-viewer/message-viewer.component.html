@@ -1,14 +1,14 @@
 <div class="message">
-    <h3 class="message-header">{{mailService.messages[0].subject}} </h3>
+    <h3 class="message-header">{{messages[0].subject}} </h3>
     <hr>
     <div class="message-summary">
 
         
-        <div class="sender"> From: {{mailService.messages[0].from}} </div>
-        <div> To: {{mailService.messages[0].to}} </div>
+        <div class="sender"> From: {{messages[0].from}} </div>
+        <div> To: {{messages[0].to}} </div>
         <div> 10/03/2016 12:00</div><!-- TODO date formatted with filter -->
         <div>
-        <app-common-star entity="mailService.message[0].starred"></app-common-star>
+        <app-common-star entity="message[0].starred"></app-common-star>
         <button class="btn" (click)="onBtnPressed($event)">Reply</button>
         <button class="btn" (click)="onBtnPressed($event)">Forward</button>
         <button class="btn" (click)="onBtnPressed($event)">Delete</button>
@@ -16,7 +16,7 @@
     </div>
     <div>
     <pre class="message-body">
-        {{ mailService.messages[0].body }}
+        {{ messages[0].body }}
     </pre>
     </div>
 </div>

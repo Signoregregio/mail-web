@@ -2,7 +2,7 @@
 <button class ="btn" TODO="prev()">Prev <span class="glyphicon glyphicon-chevron-left"></span></button>
 <button class="btn" TODO>Next <span class="glyphicon glyphicon-chevron-right"></span></button>
 
-<div *ngFor="let message of mailService.messages;let $index = index" 
+<div *ngFor="let message of messages;let $index = index" 
     class="message" >
     <!-- [ngClass]="{'message-selected' : message.selected, 
                'message-list-odd' : $odd}"> -->

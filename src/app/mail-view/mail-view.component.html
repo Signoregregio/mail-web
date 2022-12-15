@@ -1,8 +1,7 @@
 <div class="page-container">
-    
-    <header class="horizontal-container">
-        <app-mail-logo></app-mail-logo>
-<!--        
+  <header class="horizontal-container">
+    <app-mail-logo></app-mail-logo>
+    <!--        
         
         <search-panel class="horizontal-center"
             default-query=" defaultQuery "
@@ -14,55 +13,61 @@
             {{accountCtrl.accountEmail}}
         </div>
 -->
-    </header>
+  </header>
 
-    <section class="page-center horizontal-container">
-        <nav class="page-left-menu">
-            
-            <!-- <section class="compose-toolbar">
+  <section class="page-center horizontal-container">
+    <nav class="page-left-menu">
+      <!-- <section class="compose-toolbar">
                 <button (click)="compose()" class="btn btn-danger">Compose</button>
             </section> -->
-            
-            <section class="folder-list">
-                <app-folder-list [currentFolder]="currentFolder" [allowCreate]="false" title="Folder list" [folderList]="folderList.list" ></app-folder-list>
-            </section>
-            <section class="folder-list">
-                <app-folder-list [currentFolder]="currentFolder" [allowCreate]="true" title="Folder list" [folderList]="folderList.custom" ></app-folder-list>
-            </section>
-            <!-- <section class="folder-list">
-                <app-folder-list [currentFolder]="currentFolder" [allowCreate]="true"></app-folder-list>
-            </section> -->
-        </nav>
-        
-        <!-- <section class="mail-composer horizontal-center "
+
+      <section class="folder-list">
+        <app-folder-list
+          [currentFolder]="currentFolder"
+          [allowCreate]="false"
+          [folderList]="folderList.list"
+          (folderSelected)="onFolderSelected($event)"
+        >
+          <h3 title>Folder list</h3>
+        </app-folder-list>
+      </section>
+
+      <section class="folder-list">
+        <app-folder-list
+          [currentFolder]="currentFolder"
+          [allowCreate]="true"
+          [folderList]="folderList.custom"
+          (folderSelected)="onFolderSelected($event)"
+        >
+          <h3 title>Custom list</h3>
+        </app-folder-list>
+      </section>
+
+    </nav>
+
+    <!-- <section class="mail-composer horizontal-center "
                     [hidden]="!composerActive"> -->
-            <!-- TODO3 migrate composer 
+    <!-- TODO3 migrate composer 
             <message-composer 
                 BIND PROPERTIES AND EVENTS
             >
                 
             </message-composer> 
             -->
-        <!-- </section>  -->
-                                            
-        <section class="horizontal-center vertical-container">
-            <app-message-list [messages]="messages" >
+    <!-- </section>  -->
 
-            </app-message-list>
-            <div class="spacer">
-               
-                    <hr>                
-            </div>
-            <app-message-viewer (btnPressed)="onBtnPressed($event)" >
-        
-            </app-message-viewer>
-        </section>
-
+    <section class="horizontal-center vertical-container">
+      <app-message-list [messages]="messages"> </app-message-list>
+      <div class="spacer">
+        <hr />
+      </div>
+      <app-message-viewer (btnPressed)="onBtnPressed($event)" [messages]="messages">
+      </app-message-viewer>
     </section>
-    
-    <footer> 
-        powered by Angular and <a href="http://www.nispro.it">NIS s.r.l.</a>
-        <br/>
-    </footer>
-    
+  </section>
+
+  <footer>
+    powered by Angular and <a href="http://www.nispro.it">NIS s.r.l.</a>
+    <br />
+  </footer>
 </div>

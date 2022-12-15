@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MailService } from 'src/app/services/mail.service';
 
 @Component({
   selector: 'app-message-list',
@@ -7,10 +6,10 @@ import { MailService } from 'src/app/services/mail.service';
 })
 export class MessageListComponent implements OnInit {
 
-  constructor(protected mailService : MailService) { }
+  constructor() { }
 
   @Input() 
-  public messages : string[];
+  public messages : any[];
   
   ngOnInit(): void {
   }
