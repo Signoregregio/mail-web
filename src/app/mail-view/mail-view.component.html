@@ -17,9 +17,9 @@
 
   <section class="page-center horizontal-container">
     <nav class="page-left-menu">
-      <!-- <section class="compose-toolbar">
-                <button (click)="compose()" class="btn btn-danger">Compose</button>
-            </section> -->
+      <section class="compose-toolbar">
+                <button (click)="composeEmail()" class="btn btn-danger">Compose</button>
+            </section>
 
       <section class="folder-list">
         <app-folder-list
@@ -42,7 +42,6 @@
           <h3 title>Custom list</h3>
         </app-folder-list>
       </section>
-
     </nav>
 
     <!-- <section class="mail-composer horizontal-center "
@@ -61,8 +60,16 @@
       <div class="spacer">
         <hr />
       </div>
-      <app-message-viewer (btnPressed)="onBtnPressed($event)" [messages]="messages">
-      </app-message-viewer>
+      <container-element [ngSwitch]="displayCase">
+        <app-message-viewer
+          *ngSwitchCase="'show'"
+          (btnPressed)="onBtnPressed($event)"
+          [messages]="messages"
+        >
+        </app-message-viewer>
+        <app-mail-composer *ngSwitchCase="'newMail'" (sendEmail)="onSendEmail($event)"></app-mail-composer>
+        <app-mail-void *ngSwitchDefault></app-mail-void>
+      </container-element>
     </section>
   </section>
 

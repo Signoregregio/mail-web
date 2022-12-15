@@ -1,4 +1,4 @@
-import { Input } from '@angular/core';
+import { EventEmitter, Input, Output } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CommonStarComponent {
   @Input()
-  entity: any; 
-  toggleStar(){
-      this.entity.starred = !this.entity.starred
-  }
+  entity: boolean;
+  @Output()
+  starEmail = new EventEmitter<any>();
 
+  onToggleStar() {
+    this.entity = !this.entity;
+    this.starEmail.emit(this.entity);
+  }
 }

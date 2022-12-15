@@ -1,1 +1,57 @@
-<p>mail-composer works!</p>
+<div class="message">
+  <div class="message-header">New Email</div>
+  <hr />
+  <form
+    #f="ngForm"
+    (ngSubmit)="onSubmit(f); f.reset()"
+    class="ng-invalid"
+    [ngClass]="{ 'ng-invalid': subjectError || receiverError || bodyError }"
+  >
+    <div [ngClass]="{ 'ng-invalid': subjectError }">
+      <label for="subject"></label
+      ><input
+        type="text"
+        name="subject"
+        id="subject"
+        ngModel
+        placeholder="Subject..."
+        class="new-mail"
+      />
+      <span [hidden]="!subjectError" class="inputError"
+        ><i>*Missing camp</i></span
+      >
+    </div>
+    <br />
+    <div [ngClass]="{ 'ng-invalid': receiverError }">
+      <label for="to"></label>
+      <input
+        type="text"
+        name="to"
+        id="to"
+        ngModel
+        placeholder="Send this email to..."
+        class="new-mail"
+      />
+      <span [hidden]="!receiverError" class="inputError"
+        ><i>*Wrong format or missing camp</i></span
+      >
+    </div>
+    <br />
+    <div [ngClass]="{ 'ng-invalid': bodyError }">
+      <textarea
+        name="body"
+        id="body"
+        cols="100%"
+        rows="8"
+        class="message-body"
+        ngModel
+        placeholder="Your email body here..."
+        class="message-body"
+      ></textarea>
+      <span [hidden]="!bodyError" class="inputError"><i>*Invalid body</i></span>
+    </div>
+    <input type="submit" class="btnSubmit" value="Send" />
+    <input type="button" class="btnSubmit" value="Cancel" (click)="f.reset()" />
+    <input type="button" class="btnSubmit" value="Save" />
+  </form>
+</div>

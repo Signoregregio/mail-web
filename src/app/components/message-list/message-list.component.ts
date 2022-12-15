@@ -14,4 +14,7 @@ export class MessageListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onStarEmail(entity: boolean){
+    console.log(entity)
+  }
 }

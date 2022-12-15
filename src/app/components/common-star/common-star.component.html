@@ -1,6 +1,7 @@
-<span 
+<input
+type="button"
 class="glyphicon"
-[ngClass]="{'star' : !entity.starred, 'star-starred' : entity.starred}" 
-(click)="toggleStar()"
+[ngClass]="{'star' : !entity, 'star-starred' : entity}" 
+(click)="onToggleStar()"
+value="☆"
 >
-</span>

@@ -117,7 +117,11 @@ footer {
 {
     color: orange;
     font-weight: bold;  
-
+}
+.glyphicon{
+    background-color: transparent;
+    border: none;
+    font-size: large;
 }
 
 .right-align {
@@ -155,4 +159,24 @@ hr { margin-top: 5px;margin-bottom: 10px; }
 
 form.ng-invalid  {
   border: 1px solid #a94442; /* red */
+}
+
+.new-mail {
+    padding: 2px;
+    margin-top: 5px;
+    margin-left: 10px;
+    min-width: 300px;
+    border-radius: 5px;
+}
+
+.inputError {
+    color: #a94442;
+    text-decoration: underline dotted;
+    margin-left: 5px;
+}
+
+.btnSubmit {
+    margin: 5px 30px;
+    padding: 4px;
+    width: 100px;
 }

@@ -9,6 +9,8 @@ import { MailViewComponent } from './mail-view/mail-view.component';
 import { MessageListComponent } from './components/message-list/message-list.component';
 import { CommonStarComponent } from './components/common-star/common-star.component';
 import { FolderListComponent } from './components/folder-list/folder-list.component';
+import { MailComposerComponent } from './components/mail-composer/mail-composer.component';
+import { MailVoidComponent } from './components/mail-void/mail-void.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { FolderListComponent } from './components/folder-list/folder-list.compon
     MessageListComponent,
     CommonStarComponent,
     FolderListComponent,
+    MailComposerComponent,
+    MailVoidComponent
   ],
   imports: [
     BrowserModule,
