@@ -68,7 +68,7 @@ footer {
 }
 
 .folder-list {
-
+    margin-left: 5px;
     padding: 5px;
 }
 
@@ -179,4 +179,17 @@ form.ng-invalid  {
     margin: 5px 30px;
     padding: 4px;
     width: 100px;
+}
+
+.btn-danger{
+    background-color: #a94442;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 10px 0px;
+    text-align: center;
+}
+
+.compose-toolbar {
+    margin: auto;
+    width: fit-content;
 }

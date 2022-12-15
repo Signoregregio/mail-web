@@ -13,7 +13,8 @@ export class MailViewComponent implements OnInit {
   messages : any[] = this.mailList.getMessages();
   currentFolder: number = 0;
   allowCreate: boolean;
-  displayCase: string = 'newMail';
+  displayCase: string;
+  mailToShow: any;
 
   ngOnInit(): void {
   }
@@ -26,7 +27,6 @@ export class MailViewComponent implements OnInit {
     this.currentFolder = folderSelected.id;
     this.messages = this.mailList.getMessagesByFolder(folderSelected.name);
 
-    console.log(folderSelected)
   }
 
   onSendEmail(email: any){
@@ -42,8 +42,19 @@ export class MailViewComponent implements OnInit {
     console.log(this.messages)
   }
 
+  onCancelEmail(){
+    this.displayCase = 'none'
+  }
+
   composeEmail(){
     this.displayCase = 'newMail';
     console.log(this.displayCase)
+  }
+
+  onSelectEmail(index: number){
+    console.log(index)
+    this.mailToShow = this.messages[index];
+    console.log(this.mailToShow)
+    this.displayCase = 'show'
   }
 }

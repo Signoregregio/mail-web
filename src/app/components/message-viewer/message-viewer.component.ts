@@ -11,7 +11,7 @@ export class MessageViewerComponent implements OnInit {
   @Output()
   btnPressed = new EventEmitter<any>();
   @Input()
-  public messages: any[];
+  public messages: any;
   // @Output()
   // forwardPressed = new EventEmitter<any>();
   // @Output()

@@ -22,7 +22,6 @@ export class FolderListComponent implements OnInit {
       id: event.target.id,
       name: event.target.title
     }
-    console.log(folderAttributes)
     this.folderSelected.emit(folderAttributes)
   }
 

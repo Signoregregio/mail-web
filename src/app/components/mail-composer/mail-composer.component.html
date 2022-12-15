@@ -3,7 +3,7 @@
   <hr />
   <form
     #f="ngForm"
-    (ngSubmit)="onSubmit(f); f.reset()"
+    (ngSubmit)="onSubmit(f)"
     class="ng-invalid"
     [ngClass]="{ 'ng-invalid': subjectError || receiverError || bodyError }"
   >
@@ -16,6 +16,8 @@
         ngModel
         placeholder="Subject..."
         class="new-mail"
+        minlength="4"
+        required
       />
       <span [hidden]="!subjectError" class="inputError"
         ><i>*Missing camp</i></span
@@ -25,12 +27,14 @@
     <div [ngClass]="{ 'ng-invalid': receiverError }">
       <label for="to"></label>
       <input
-        type="text"
+        type="mail"
         name="to"
         id="to"
         ngModel
         placeholder="Send this email to..."
         class="new-mail"
+        required
+        [pattern]="mailRegex"
       />
       <span [hidden]="!receiverError" class="inputError"
         ><i>*Wrong format or missing camp</i></span
@@ -47,11 +51,13 @@
         ngModel
         placeholder="Your email body here..."
         class="message-body"
+        minlength="1"
+        required
       ></textarea>
       <span [hidden]="!bodyError" class="inputError"><i>*Invalid body</i></span>
     </div>
     <input type="submit" class="btnSubmit" value="Send" />
-    <input type="button" class="btnSubmit" value="Cancel" (click)="f.reset()" />
+    <input type="button" class="btnSubmit" value="Cancel" (click)="f.reset(); onCancel()" />
     <input type="button" class="btnSubmit" value="Save" />
   </form>
 </div>

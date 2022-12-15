@@ -1,12 +1,12 @@
 <h3>{{ messages.length }} messages</h3>
-<button class="btn" TODO="prev()">
+<button class="btn" (click)="prevPage()">
   Prev <span class="glyphicon glyphicon-chevron-left"></span>
 </button>
-<button class="btn" TODO>
+<button class="btn" (click)="nextPage()">
   Next <span class="glyphicon glyphicon-chevron-right"></span>
 </button>
 
-<div *ngFor="let message of messages; let $index = index" class="message">
+<div *ngFor="let message of messages | slice:sliceStart:sliceEnd ; let $index = index" class="message">
   <!-- [ngClass]="{'message-selected' : message.selected, 
                'message-list-odd' : $odd}"> -->
 
@@ -16,12 +16,16 @@
          > -->
   <input type="checkbox" TODO="message.selected" />
 
-  <app-common-star [entity]="message.starred" (starEmail)="onStarEmail($event)" ></app-common-star>
-
-  <span> {{ $index + 1 }} From: {{ message.from }}</span>
-  <span> ----  {{ message.subject }}</span>
-  <span class="align-right"> 10/03/2016 12:00</span
-  ><!-- TODO date formatted with filter -->
-  <!-- </div> -->
+  <app-common-star
+    [entity]="message.starred"
+    (starEmail)="onStarEmail($event)"
+  ></app-common-star>
+  <span (click)="onSelectEmail($index + sliceStart)">
+    <span> {{ $index + 1 + sliceStart }} From: {{ message.from }}</span>
+    <span> ---- {{ message.subject }}</span>
+    <span class="align-right"> 10/03/2016 12:00</span
+    ><!-- TODO date formatted with filter -->
+    <!-- </div> -->
+  </span>
   <div [hidden]="messages.length > 0">No results</div>
 </div>
