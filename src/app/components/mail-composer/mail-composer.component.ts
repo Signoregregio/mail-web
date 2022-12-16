@@ -17,6 +17,9 @@ export class MailComposerComponent implements OnInit {
     subject: '',
   };
 
+  @Input()
+  public isReplyng: boolean = false;
+
   ngOnInit(): void {}
 
   subjectError: boolean = false;
@@ -31,7 +34,9 @@ export class MailComposerComponent implements OnInit {
     this.checkTo(f.value.to);
     this.checkBody(f.value.body);
 
-    console.log(f.value)
+    if (this.subjectError || this.receiverError || this.bodyError) {
+      return console.log('error: form is not complete or correct')
+    }
     this.sendEmail.emit(f.value);
   }
 
@@ -40,7 +45,7 @@ export class MailComposerComponent implements OnInit {
   }
 
   checkSubject(subject: string) {
-    if (subject === null || subject.length <= 3) {
+    if (subject === undefined || subject.length <= 3) {
       this.subjectError = true;
     } else {
       this.subjectError = false;
