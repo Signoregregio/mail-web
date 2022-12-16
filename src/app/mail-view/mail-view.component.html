@@ -67,7 +67,7 @@
       <container-element [ngSwitch]="displayCase">
         <app-message-viewer
           *ngSwitchCase="'show'"
-          (btnPressed)="onBtnPressed($event)"
+          (btnPressed)="onBtnMessageViewerPressed($event)"
           [messages]="mailToShow"
         >
         </app-message-viewer>

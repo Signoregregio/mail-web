@@ -23,7 +23,7 @@ export class MailViewComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onBtnPressed(value: string) {
+  onBtnMessageViewerPressed(value: string) {
     console.log(value);
     switch (value) {
       case 'Reply':
