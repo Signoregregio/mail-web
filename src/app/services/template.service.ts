@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
-import { MailService } from './mail.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class TemplateService {
 
   constructor() { }

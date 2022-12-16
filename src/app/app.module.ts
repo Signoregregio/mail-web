@@ -12,6 +12,7 @@ import { FolderListComponent } from './components/folder-list/folder-list.compon
 import { MailComposerComponent } from './components/mail-composer/mail-composer.component';
 import { MailVoidComponent } from './components/mail-void/mail-void.component';
 import { HighlightDirective } from './directive/highlight.directive';
+import { LogService } from './services/log.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { HighlightDirective } from './directive/highlight.directive';
     AppRoutingModule,
     FormsModule
   ],
-  providers: [],
+  providers: [LogService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

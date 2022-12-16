@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
-
-@Injectable({
-  providedIn: 'root',
-})
+import { LogService } from './log.service';
+@Injectable()
 export class MailService {
-  constructor() {}
+  constructor(private logService : LogService) {}
+
+  log(message: any){
+    this.logService.log(message)
+  }
+  
   messages = [
     {
       to: 'carlo.bonamico@gmail.com',
@@ -40,7 +43,7 @@ export class MailService {
     return this.messages;
   }
 
-  getMessagesByFolder(folderName) {
+  getMessagesByFolder(folderName: string) {
     var messages = [
       {
         to: 'carlo.bonamico@gmail.com',
@@ -88,7 +91,7 @@ export class MailService {
     return messages;
   }
 
-  getMessagesBySearch(query) {
+  getMessagesBySearch(query: string) {
     //TODO replace this with a call to MessageSearchService.searchMessages(query)
     var messages = [
       {
