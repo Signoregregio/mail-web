@@ -18,6 +18,7 @@
         class="new-mail"
         minlength="4"
         required
+        [(ngModel)]="newMessage.subject"
       />
       <span [hidden]="!subjectError" class="inputError"
         ><i>*Missing camp</i></span
@@ -35,6 +36,7 @@
         class="new-mail"
         required
         [pattern]="mailRegex"
+        [(ngModel)]="newMessage.to"
       />
       <span [hidden]="!receiverError" class="inputError"
         ><i>*Wrong format or missing camp</i></span

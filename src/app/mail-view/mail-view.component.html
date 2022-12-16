@@ -56,7 +56,11 @@
     <!-- </section>  -->
 
     <section class="horizontal-center vertical-container">
-      <app-message-list [messages]="messages" (selectEmail)="onSelectEmail($event)"> </app-message-list>
+      <app-message-list
+        [messages]="messages"
+        (selectEmail)="onSelectEmail($event)"
+      >
+      </app-message-list>
       <div class="spacer">
         <hr />
       </div>
@@ -73,6 +77,12 @@
           (cancelEmail)="onCancelEmail()"
         ></app-mail-composer>
         <app-mail-void *ngSwitchDefault></app-mail-void>
+        <app-mail-composer
+          *ngSwitchCase="'reply'"
+          [newMessage]="replyMail"
+          (sendEmail)="onSendEmail($event)"
+          (cancelEmail)="onCancelEmail()"
+        ></app-mail-composer>
       </container-element>
     </section>
   </section>

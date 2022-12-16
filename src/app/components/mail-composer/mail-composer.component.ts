@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-mail-composer',
@@ -11,6 +11,11 @@ export class MailComposerComponent implements OnInit {
 
   @Output()
   cancelEmail = new EventEmitter<any>();
+  @Input()
+  public newMessage = {
+    to: '',
+    subject: '',
+  };
 
   ngOnInit(): void {}
 
@@ -20,12 +25,13 @@ export class MailComposerComponent implements OnInit {
 
   mailRegex =
     /^[a-zA-Z0-9.!#$%&'*+=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
-    
+
   onSubmit(f: any) {
     this.checkSubject(f.value.subject);
     this.checkTo(f.value.to);
     this.checkBody(f.value.body);
 
+    console.log(f.value)
     this.sendEmail.emit(f.value);
   }
 

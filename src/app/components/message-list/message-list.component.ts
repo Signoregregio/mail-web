@@ -1,10 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-message-list',
   templateUrl: './message-list.component.html',
 })
-export class MessageListComponent implements OnInit {
+export class MessageListComponent implements OnInit, OnChanges {
   constructor() {}
   mailsShowed = 3;
   sliceStart = 0;
@@ -16,7 +16,8 @@ export class MessageListComponent implements OnInit {
   selectEmail = new EventEmitter<any>();
 
   ngOnInit(): void {}
-
+  ngOnChanges(changes: SimpleChanges): void {
+  }
   onStarEmail(entity: boolean) {
     console.log(entity);
   }
