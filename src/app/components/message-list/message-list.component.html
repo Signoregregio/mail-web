@@ -1,31 +1,39 @@
-<h3>{{ messages.length }} messages</h3>
-<button class="btn" (click)="prevPage()">
-  Prev <span class="glyphicon glyphicon-chevron-left"></span>
-</button>
-<button class="btn" (click)="nextPage()">
-  Next <span class="glyphicon glyphicon-chevron-right"></span>
-</button>
+<div class="message-list">
+  <h3>{{ messages.length }} messages</h3>
+  <button class="btn" (click)="prevPage()">
+    Prev <span class="glyphicon glyphicon-chevron-left"></span>
+  </button>
+  <button class="btn" (click)="nextPage()">
+    Next <span class="glyphicon glyphicon-chevron-right"></span>
+  </button>
 
-<div *ngFor="let message of messages | slice:sliceStart:sliceEnd ; let $index = index" class="message">
-  <!-- [ngClass]="{'message-selected' : message.selected, 
+  <div
+    *ngFor="
+      let message of messages | slice : sliceStart : sliceEnd;
+      let $index = index
+    "
+    class="message"
+    appHighlightMailList
+
+  >
+    <!-- [ngClass]="{'message-selected' : message.selected, 
                'message-list-odd' : $odd}"> -->
 
-  <!-- <div class="message-summary" 
+    <!-- <div class="message-summary" 
          [ngClass]="{'message-current' : $index == currentMessageIndex}"
          TODO-set-current-on-click
          > -->
-  <input type="checkbox" TODO="message.selected" />
+    <input type="checkbox" TODO="message.selected" />
 
-  <app-common-star
-    [entity]="message.starred"
-    (starEmail)="onStarEmail($event)"
-  ></app-common-star>
-  <span (click)="onSelectEmail($index + sliceStart)">
-    <span> {{ $index + 1 + sliceStart }} From: {{ message.from }}</span>
-    <span> ---- {{ message.subject }}</span>
-    <span class="align-right"> 10/03/2016 12:00</span
-    ><!-- TODO date formatted with filter -->
-    <!-- </div> -->
-  </span>
-  <div [hidden]="messages.length > 0">No results</div>
+    <app-common-star
+      [entity]="message.starred"
+      (starEmail)="onStarEmail($event)"
+    ></app-common-star>
+    <span (click)="onSelectEmail($index + sliceStart)">
+      <span> {{ $index + 1 + sliceStart }} From: {{ message.from }}</span>
+      <span> ---- {{ message.subject }}</span>
+      <span class="align-right"> {{ todayDate | date: 'ccc MM/dd/yy, HH:mm' }} </span>      
+    </span>
+    <div [hidden]="messages.length > 0">No results</div>
+  </div>
 </div>

@@ -1,13 +1,13 @@
-import { Directive, ElementRef, HostBinding, HostListener, Input } from '@angular/core';
+import { Directive, HostBinding, HostListener, Input } from '@angular/core';
 
 @Directive({
-  selector: '[appHighlight]'
+  selector: '[appHighlightFolder]'
 })
-export class HighlightDirective {
+export class HighlightFolderDirective {
    @Input()
    appHighlight = '';
 
-  constructor(private element: ElementRef) { 
+  constructor() { 
   }
 
   @HostBinding("style.backgroundColor") backgroundColor:string;

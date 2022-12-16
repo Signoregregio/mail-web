@@ -12,10 +12,7 @@ export class MessageViewerComponent implements OnInit {
   btnPressed = new EventEmitter<any>();
   @Input()
   public messages: any;
-  // @Output()
-  // forwardPressed = new EventEmitter<any>();
-  // @Output()
-  // deletePressed = new EventEmitter<any>();
+  todayDate = new Date();
   currentMessage;
   currentMessageIndex = 0;
 

@@ -11,9 +11,10 @@ import { CommonStarComponent } from './components/common-star/common-star.compon
 import { FolderListComponent } from './components/folder-list/folder-list.component';
 import { MailComposerComponent } from './components/mail-composer/mail-composer.component';
 import { MailVoidComponent } from './components/mail-void/mail-void.component';
-import { HighlightDirective } from './directive/highlight.directive';
+import { HighlightFolderDirective } from './directive/highlight-folder.directive';
 import { LogService } from './services/log.service';
-
+import { HttpClientModule } from '@angular/common/http';
+import { HighlightMailListDirective } from './directive/highlight-mail-list.directive';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,14 +26,11 @@ import { LogService } from './services/log.service';
     FolderListComponent,
     MailComposerComponent,
     MailVoidComponent,
-    HighlightDirective
+    HighlightFolderDirective,
+    HighlightMailListDirective,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule
-  ],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [LogService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

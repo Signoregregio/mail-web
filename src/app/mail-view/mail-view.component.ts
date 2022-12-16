@@ -5,15 +5,16 @@ import { TemplateService } from '../services/template.service';
 @Component({
   selector: 'app-mail-view',
   templateUrl: './mail-view.component.html',
-  providers: [MailService, FolderService, TemplateService]
+  providers: [MailService, FolderService, TemplateService],
 })
-export class MailViewComponent implements OnInit{
+export class MailViewComponent implements OnInit {
   constructor(
     protected folderList: FolderService,
     protected mailList: MailService,
-    protected replyTemplate: TemplateService
+    protected replyTemplate: TemplateService,
   ) {}
 
+  
   messages: any[] = this.mailList.getMessages();
   currentFolder: number = 0;
   allowCreate: boolean;
@@ -23,7 +24,6 @@ export class MailViewComponent implements OnInit{
 
   ngOnInit(): void {}
 
-  
   onBtnMessageViewerPressed(value: string) {
     console.log(value);
     switch (value) {
@@ -38,7 +38,7 @@ export class MailViewComponent implements OnInit{
   onFolderSelected(folderSelected: any) {
     this.currentFolder = folderSelected.id;
     this.messages = this.mailList.getMessagesByFolder(folderSelected.name);
-    this.mailList.log(folderSelected.name)
+    this.mailList.log(folderSelected.name);
   }
 
   onSendEmail(email: any) {

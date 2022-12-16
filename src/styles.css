@@ -76,9 +76,9 @@ footer {
     padding-right: 10px;
 }
 .message-list {
-    background-color: white;
+    background-color: #ffffff;
     padding: 5px;
-    
+    height: 180px;
 }
 
 .message {

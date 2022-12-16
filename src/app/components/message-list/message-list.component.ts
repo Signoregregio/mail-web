@@ -9,6 +9,7 @@ export class MessageListComponent implements OnInit, OnChanges {
   mailsShowed = 3;
   sliceStart = 0;
   sliceEnd = this.mailsShowed;
+  todayDate = new Date();
 
   @Input()
   public messages: any[];

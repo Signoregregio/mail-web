@@ -6,7 +6,7 @@
         
         <div class="sender"> From: {{messages.from}} </div>
         <div> To: {{messages.to}} </div>
-        <div> 10/03/2016 12:00</div><!-- TODO date formatted with filter -->
+        <div> {{ todayDate | date : 'ccc MM/dd/yy, HH:mm ' }} </div><!-- TODO date formatted with filter -->
         <div>
         <app-common-star [entity]="messages.starred"></app-common-star>
         <button class="btn" (click)="onBtnPressed($event)">Reply</button>
