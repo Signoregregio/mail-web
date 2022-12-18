@@ -15,6 +15,7 @@ import { HighlightFolderDirective } from './directive/highlight-folder.directive
 import { LogService } from './services/log.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HighlightMailListDirective } from './directive/highlight-mail-list.directive';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,6 +29,7 @@ import { HighlightMailListDirective } from './directive/highlight-mail-list.dire
     MailVoidComponent,
     HighlightFolderDirective,
     HighlightMailListDirective,
+    PageNotFoundComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [LogService],

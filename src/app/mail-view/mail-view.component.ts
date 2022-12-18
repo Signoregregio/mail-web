@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FolderService } from '../services/folder.service';
 import { MailService } from 'src/app/services/mail.service';
 import { TemplateService } from '../services/template.service';
+import { ActivatedRoute, Params } from '@angular/router';
 @Component({
   selector: 'app-mail-view',
   templateUrl: './mail-view.component.html',
@@ -12,11 +13,11 @@ export class MailViewComponent implements OnInit {
     protected folderList: FolderService,
     protected mailList: MailService,
     protected replyTemplate: TemplateService,
+    private route: ActivatedRoute
   ) {}
 
-  
   messages: any[] = this.mailList.getMessages();
-  currentFolder: number = 0;
+  currentFolder = 0;
   allowCreate: boolean;
   displayCase: string;
   mailToShow: any;
@@ -35,10 +36,11 @@ export class MailViewComponent implements OnInit {
     }
   }
 
-  onFolderSelected(folderSelected: any) {
-    this.currentFolder = folderSelected.id;
-    this.messages = this.mailList.getMessagesByFolder(folderSelected.name);
-    this.mailList.log(folderSelected.name);
+  onFolderSelected(folderSelected: number) {
+    this.currentFolder = folderSelected;
+    let folderName = this.folderList.getName(folderSelected);
+    this.messages = this.mailList.getMessagesByFolder(folderName);
+    this.mailList.log(folderName);
   }
 
   onSendEmail(email: any) {

@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './folder-list.component.html',
 })
 export class FolderListComponent implements OnInit {
+  constructor() {}
+
   @Input()
   public currentFolder: number;
   @Input()
@@ -17,18 +19,14 @@ export class FolderListComponent implements OnInit {
   @Output()
   folderSelected = new EventEmitter<any>();
 
-  onFolderSelected(event: any){
-    let folderAttributes = {
-      id: event.target.id,
-      name: event.target.title
-    }
-    this.folderSelected.emit(folderAttributes)
-  }
+  folderId: number;
 
-  constructor() {}
+  onFolderSelected(event: any) {
+    (this.folderId = event.target.id);
+    this.folderSelected.emit(this.folderId);
+  }
 
   newFolderName = '';
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 }
