@@ -16,6 +16,7 @@ import { LogService } from './services/log.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HighlightMailListDirective } from './directive/highlight-mail-list.directive';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { SearchPanelComponent } from './components/search-panel/search-panel.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,6 +31,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     HighlightFolderDirective,
     HighlightMailListDirective,
     PageNotFoundComponent,
+    SearchPanelComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [LogService],

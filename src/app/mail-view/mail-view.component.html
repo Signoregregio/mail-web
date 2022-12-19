@@ -1,19 +1,18 @@
-<div *ngIf="messagesLoaded | async" >
+<div *ngIf="messagesLoaded | async">
   <div class="page-container">
     <header class="horizontal-container">
       <app-mail-logo></app-mail-logo>
-      <!--        
-        
-        <search-panel class="horizontal-center"
-            default-query=" defaultQuery "
-            on-search-start = "search(query) "
-            >
-        </search-panel>
-        
-        <div class="right-align" ng-controller="AccountController as accountCtrl">
-            {{accountCtrl.accountEmail}}
-        </div>
--->
+
+      <app-search-panel
+        class="horizontal-center"
+        default-query=" defaultQuery "
+        >
+        <!-- on-search-start="search(query)" -->
+      </app-search-panel>
+
+      <div class="right-align" ng-controller="AccountController as accountCtrl">
+        <!-- {{ accountCtrl.accountEmail }} -->User
+      </div>
     </header>
 
     <section class="page-center horizontal-container">
@@ -93,14 +92,3 @@
     </footer>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-

@@ -46,8 +46,10 @@ export class MailViewComponent implements OnInit {
         break;
       case 'Delete':
         this.messages.splice(this.mailToShow.index, 1);
+        this.mailList.mailDelete(this.mailToShow.index);
         console.log(this.messages);
-        this.displayCase = 'delete'
+        this.displayCase = 'delete';
+        
         break;
     }
   }

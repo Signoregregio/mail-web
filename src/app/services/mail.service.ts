@@ -143,4 +143,10 @@ export class MailService {
     ];
     return messages;
   }
+
+  mailDelete(id: Number){
+    this.mailUrl
+    this.messages = this.http.delete<any>((this.mailUrl + `/${id}`)).toPromise();
+
+  }
 }
