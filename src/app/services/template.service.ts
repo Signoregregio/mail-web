@@ -2,16 +2,28 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class TemplateService {
+  constructor() {}
 
-  constructor() { }
+  getReplyTemplate(message: any) {
+    let newTemplate = {
+      to: message.from,
+      subject: 'Re:' + message.subject,
+      body: '> ' + message.body + '\n-------------------- \n',
+    };
+    return newTemplate;
+  }
 
-  
-  getReplyTemplate(message : any)
-  {
-      var newMessage = {
-          to: message.from,
-          subject: "Re:"+message.subject
-      };
-      return newMessage; 
+  getForwardTemplate(message: any) {
+    let newTemplate = {
+      to: '',
+      subject: message.subject,
+      body:
+        'From : ' +
+        message.from +
+        '\nBody : ' +
+        message.body +
+        '\n \n-------------------- \n',
+    };
+    return newTemplate;
   }
 }

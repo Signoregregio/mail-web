@@ -12,7 +12,7 @@ export class MailViewComponent implements OnInit {
   constructor(
     protected folderList: FolderService,
     protected mailList: MailService,
-    protected replyTemplate: TemplateService,
+    protected mailTemplate: TemplateService,
     private route: ActivatedRoute
   ) {}
 
@@ -22,6 +22,7 @@ export class MailViewComponent implements OnInit {
   displayCase: string;
   mailToShow: any;
   replyMail: any;
+  forwardMail: any;
 
   ngOnInit(): void {}
 
@@ -29,9 +30,19 @@ export class MailViewComponent implements OnInit {
     console.log(value);
     switch (value) {
       case 'Reply':
-        this.replyMail = this.replyTemplate.getReplyTemplate(this.mailToShow);
+        this.replyMail = this.mailTemplate.getReplyTemplate(this.mailToShow);
         console.log(this.replyMail);
         this.displayCase = 'reply';
+        break;
+      case 'Forward':
+        this.forwardMail = this.mailTemplate.getForwardTemplate(this.mailToShow);
+        console.log(this.forwardMail);
+        this.displayCase = 'forward'
+        break;
+      case 'Delete':
+        this.messages.splice(this.mailToShow.index, 1);
+        console.log(this.messages);
+        this.displayCase = 'delete'
         break;
     }
   }
@@ -68,6 +79,7 @@ export class MailViewComponent implements OnInit {
   onSelectEmail(index: number) {
     console.log(index);
     this.mailToShow = this.messages[index];
+    this.mailToShow.index = index;
     console.log(this.mailToShow);
     this.displayCase = 'show';
   }

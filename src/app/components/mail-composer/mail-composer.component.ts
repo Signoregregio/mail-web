@@ -15,10 +15,14 @@ export class MailComposerComponent implements OnInit {
   public newMessage = {
     to: '',
     subject: '',
+    body: '',
   };
 
   @Input()
   public isReplyng: boolean = false;
+  
+  @Input()
+  public isForwarding: boolean = false;
 
   ngOnInit(): void {}
 
@@ -29,15 +33,15 @@ export class MailComposerComponent implements OnInit {
   mailRegex =
     /^[a-zA-Z0-9.!#$%&'*+=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
-  onSubmit(f: any) {
-    this.checkSubject(f.value.subject);
-    this.checkTo(f.value.to);
-    this.checkBody(f.value.body);
+  onSubmit(formMail: any) {
+    this.checkSubject(formMail.value.subject);
+    this.checkTo(formMail.value.to);
+    this.checkBody(formMail.value.body);
 
     if (this.subjectError || this.receiverError || this.bodyError) {
       return console.log('error: form is not complete or correct')
     }
-    this.sendEmail.emit(f.value);
+    this.sendEmail.emit(formMail.value);
   }
 
   onCancel() {

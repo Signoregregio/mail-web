@@ -2,8 +2,8 @@
   <div class="message-header">New Email</div>
   <hr />
   <form
-    #f="ngForm"
-    (ngSubmit)="onSubmit(f)"
+    #formMail="ngForm"
+    (ngSubmit)="onSubmit(formMail)"
     class="ng-invalid"
     [ngClass]="{ 'ng-invalid': subjectError || receiverError || bodyError }"
   >
@@ -13,13 +13,13 @@
         type="text"
         name="subject"
         id="subject"
-        ngModel
         placeholder="Subject..."
         class="new-mail"
         minlength="4"
         required
         [(ngModel)]="newMessage.subject"
         [disabled]="isReplyng"
+        [disabled]="isForwarding"
       />
       <span [hidden]="!subjectError" class="inputError"
         ><i>*Missing camp</i></span
@@ -32,7 +32,6 @@
         type="mail"
         name="to"
         id="to"
-        ngModel
         placeholder="Send this email to..."
         class="new-mail"
         required
@@ -56,12 +55,14 @@
         placeholder="Your email body here..."
         class="message-body"
         minlength="1"
+        [(ngModel)]="newMessage.body"
+        [disabled]="isForwarding"
         required
       ></textarea>
       <span [hidden]="!bodyError" class="inputError"><i>*Invalid body</i></span>
     </div>
     <input type="submit" class="btnSubmit" value="Send" />
-    <input type="button" class="btnSubmit" value="Cancel" (click)="f.reset(); onCancel()" />
+    <input type="button" class="btnSubmit" value="Cancel" (click)="formMail.reset(); onCancel()" />
     <input type="button" class="btnSubmit" value="Save" />
   </form>
 </div>

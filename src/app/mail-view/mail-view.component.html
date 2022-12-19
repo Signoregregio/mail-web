@@ -73,6 +73,13 @@
           (cancelEmail)="onCancelEmail()"
           [isReplyng]="true"
         ></app-mail-composer>
+        <app-mail-composer
+          *ngSwitchCase="'forward'"
+          [newMessage]="forwardMail"
+          (sendEmail)="onSendEmail($event)"
+          (cancelEmail)="onCancelEmail()"
+          [isForwarding]="true"
+        ></app-mail-composer>
       </container-element>
     </section>
   </section>
