@@ -1,7 +1,8 @@
-<div class="page-container">
-  <header class="horizontal-container">
-    <app-mail-logo></app-mail-logo>
-    <!--        
+<div *ngIf="messagesLoaded | async" >
+  <div class="page-container">
+    <header class="horizontal-container">
+      <app-mail-logo></app-mail-logo>
+      <!--        
         
         <search-panel class="horizontal-center"
             default-query=" defaultQuery "
@@ -13,79 +14,93 @@
             {{accountCtrl.accountEmail}}
         </div>
 -->
-  </header>
+    </header>
 
-  <section class="page-center horizontal-container">
-    <nav class="page-left-menu">
-      <section class="compose-toolbar">
-        <button (click)="composeEmail()" class="btn btn-danger">Compose</button>
-      </section>
+    <section class="page-center horizontal-container">
+      <nav class="page-left-menu">
+        <section class="compose-toolbar">
+          <button (click)="composeEmail()" class="btn btn-danger">
+            Compose
+          </button>
+        </section>
 
-      <section class="folder-list">
-        <app-folder-list
-          [currentFolder]="currentFolder"
-          [allowCreate]="false"
-          [folderList]="folderList.list"
-          (folderSelected)="onFolderSelected($event)"
+        <section class="folder-list">
+          <app-folder-list
+            [currentFolder]="currentFolder"
+            [allowCreate]="false"
+            [folderList]="folderList.list"
+            (folderSelected)="onFolderSelected($event)"
+          >
+            <h3 title>Folder list</h3>
+          </app-folder-list>
+        </section>
+
+        <section class="folder-list">
+          <app-folder-list
+            [currentFolder]="currentFolder"
+            [allowCreate]="true"
+            [folderList]="folderList.customList"
+            (folderSelected)="onFolderSelected($event)"
+          >
+            <h3 title>Custom list</h3>
+          </app-folder-list>
+        </section>
+      </nav>
+
+      <section class="horizontal-center vertical-container">
+        <app-message-list
+          [messages]="messages"
+          (selectEmail)="onSelectEmail($event)"
         >
-          <h3 title>Folder list</h3>
-        </app-folder-list>
+        </app-message-list>
+        <div class="spacer">
+          <hr />
+        </div>
+        <container-element [ngSwitch]="displayCase">
+          <app-message-viewer
+            *ngSwitchCase="'show'"
+            (btnPressed)="onBtnMessageViewerPressed($event)"
+            [message]="mailToShow"
+          >
+          </app-message-viewer>
+          <app-mail-composer
+            *ngSwitchCase="'newMail'"
+            (sendEmail)="onSendEmail($event)"
+            (cancelEmail)="onCancelEmail()"
+          ></app-mail-composer>
+          <app-mail-void *ngSwitchDefault></app-mail-void>
+          <app-mail-composer
+            *ngSwitchCase="'reply'"
+            [newMessage]="replyMail"
+            (sendEmail)="onSendEmail($event)"
+            (cancelEmail)="onCancelEmail()"
+            [isReplyng]="true"
+          ></app-mail-composer>
+          <app-mail-composer
+            *ngSwitchCase="'forward'"
+            [newMessage]="forwardMail"
+            (sendEmail)="onSendEmail($event)"
+            (cancelEmail)="onCancelEmail()"
+            [isForwarding]="true"
+          ></app-mail-composer>
+        </container-element>
       </section>
-
-      <section class="folder-list">
-        <app-folder-list
-          [currentFolder]="currentFolder"
-          [allowCreate]="true"
-          [folderList]="folderList.customList"
-          (folderSelected)="onFolderSelected($event)"
-        >
-          <h3 title>Custom list</h3>
-        </app-folder-list>
-      </section>
-    </nav>
-
-    <section class="horizontal-center vertical-container">
-      <app-message-list
-        [messages]="messages"
-        (selectEmail)="onSelectEmail($event)"
-      >
-      </app-message-list>
-      <div class="spacer">
-        <hr />
-      </div>
-      <container-element [ngSwitch]="displayCase">
-        <app-message-viewer
-          *ngSwitchCase="'show'"
-          (btnPressed)="onBtnMessageViewerPressed($event)"
-          [messages]="mailToShow"
-        >
-        </app-message-viewer>
-        <app-mail-composer
-          *ngSwitchCase="'newMail'"
-          (sendEmail)="onSendEmail($event)"
-          (cancelEmail)="onCancelEmail()"
-        ></app-mail-composer>
-        <app-mail-void *ngSwitchDefault></app-mail-void>
-        <app-mail-composer
-          *ngSwitchCase="'reply'"
-          [newMessage]="replyMail"
-          (sendEmail)="onSendEmail($event)"
-          (cancelEmail)="onCancelEmail()"
-          [isReplyng]="true"
-        ></app-mail-composer>
-        <app-mail-composer
-          *ngSwitchCase="'forward'"
-          [newMessage]="forwardMail"
-          (sendEmail)="onSendEmail($event)"
-          (cancelEmail)="onCancelEmail()"
-          [isForwarding]="true"
-        ></app-mail-composer>
-      </container-element>
     </section>
-  </section>
 
-  <footer>
-    powered by Angular and <a href="http://www.nispro.it">NIS s.r.l.</a>
-    <br />
-  </footer>
+    <footer>
+      powered by Angular and <a href="http://www.nispro.it">NIS s.r.l.</a>
+      <br />
+    </footer>
+  </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+

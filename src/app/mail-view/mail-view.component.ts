@@ -13,10 +13,11 @@ export class MailViewComponent implements OnInit {
     protected folderList: FolderService,
     protected mailList: MailService,
     protected mailTemplate: TemplateService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {}
 
-  messages: any[] = this.mailList.getMessages();
+  messagesLoaded: Promise<boolean>;
+  messages: any[];
   currentFolder = 0;
   allowCreate: boolean;
   displayCase: string;
@@ -24,7 +25,11 @@ export class MailViewComponent implements OnInit {
   replyMail: any;
   forwardMail: any;
 
-  ngOnInit(): void {}
+  async ngOnInit(): Promise<any> {
+    this.messages = await this.mailList.getMessages();
+    this.messages = await this.mailList.getMessagesByFolder('inbox');
+    this.messagesLoaded = Promise.resolve(true);
+  }
 
   onBtnMessageViewerPressed(value: string) {
     console.log(value);
@@ -47,10 +52,10 @@ export class MailViewComponent implements OnInit {
     }
   }
 
-  onFolderSelected(folderSelected: number) {
+  async onFolderSelected(folderSelected: number) {
     this.currentFolder = folderSelected;
     let folderName = this.folderList.getName(folderSelected);
-    this.messages = this.mailList.getMessagesByFolder(folderName);
+    this.messages = await this.mailList.getMessagesByFolder(folderName);
     this.mailList.log(folderName);
   }
 

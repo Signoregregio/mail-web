@@ -1,14 +1,14 @@
 <div class="message">
-    <h3 class="message-header">{{messages.subject}} </h3>
+    <h3 class="message-header">{{message.subject}} </h3>
     <hr>
     <div class="message-summary">
 
         
-        <div class="sender"> From: {{messages.from}} </div>
-        <div> To: {{messages.to}} </div>
+        <div class="sender"> From: {{message.from}} </div>
+        <div> To: {{message.to}} </div>
         <div> {{ todayDate | date : 'ccc MM/dd/yy, HH:mm ' }} </div><!-- TODO date formatted with filter -->
         <div>
-        <app-common-star [entity]="messages.starred"></app-common-star>
+        <app-common-star [entity]="message.starred"></app-common-star>
         <button class="btn" (click)="onBtnPressed($event)">Reply</button>
         <button class="btn" (click)="onBtnPressed($event)">Forward</button>
         <button class="btn" (click)="onBtnPressed($event)">Delete</button>
@@ -16,7 +16,7 @@
     </div>
     <div>
     <pre class="message-body">
-        {{ messages.body }}
+        {{ message.body }}
     </pre>
     </div>
 </div>

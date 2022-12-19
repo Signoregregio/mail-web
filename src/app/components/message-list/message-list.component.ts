@@ -24,6 +24,7 @@ export class MessageListComponent implements OnInit, OnChanges {
   }
 
   onSelectEmail(index: number) {
+    console.log(index)
     this.selectEmail.emit(index);
   }
 
