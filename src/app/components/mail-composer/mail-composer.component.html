@@ -4,7 +4,6 @@
   <form
     #formMail="ngForm"
     (ngSubmit)="onSubmit(formMail)"
-    class="ng-invalid"
     [ngClass]="{ 'ng-invalid': subjectError || receiverError || bodyError }"
   >
     <div [ngClass]="{ 'ng-invalid': subjectError }">
@@ -34,12 +33,13 @@
         placeholder="Send this email to..."
         class="new-mail"
         required
-        [pattern]="mailRegex"
+        email
         [(ngModel)]="newMessage.to"
         [disabled]="isReplyng"
+        #email="ngModel"
       />
-      <span [hidden]="!receiverError" class="inputError"
-        ><i>*Wrong format or missing camp {{mailRegex}}</i></span
+      <span *ngIf="!email.valid && email.touched" class="inputError"
+        ><i>*Wrong format or missing camp </i></span
       >
     </div>
     <br />
@@ -60,7 +60,7 @@
       ></textarea>
       <span [hidden]="!bodyError" class="inputError"><i>*Invalid body</i></span>
     </div>
-    <input type="submit" class="btnSubmit" value="Send" />
+    <input type="submit" class="btnSubmit" value="Send" [disabled]="!formMail.valid"/>
     <input type="button" class="btnSubmit" value="Cancel" (click)="formMail.reset(); onCancel()" />
     <input type="button" class="btnSubmit" value="Save" />
   </form>
