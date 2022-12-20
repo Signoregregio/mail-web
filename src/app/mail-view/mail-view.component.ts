@@ -3,6 +3,8 @@ import { FolderService } from '../services/folder.service';
 import { MailService } from 'src/app/services/mail.service';
 import { TemplateService } from '../services/template.service';
 import { ActivatedRoute, Params } from '@angular/router';
+import { AuthGuard } from '../services/auth-guard';
+
 @Component({
   selector: 'app-mail-view',
   templateUrl: './mail-view.component.html',
@@ -59,6 +61,12 @@ export class MailViewComponent implements OnInit {
     let folderName = this.folderList.getName(folderSelected);
     this.messages = await this.mailList.getMessagesByFolder(folderName);
     this.mailList.log(folderName);
+  }
+  async onQueryChange(query: string){
+    let folderName = this.folderList.getName(this.currentFolder);
+    this.messages = await this.mailList.getMessagesByFolder(folderName);
+
+    this.messages = this.mailList.getMessagesBySearch(query, this.messages)
   }
 
   onSendEmail(email: any) {

@@ -28,6 +28,10 @@ export class FolderService {
       name: 'Typescript',
       index: 4,
     },
+    {
+      name: 'All messages',
+      index: 5,
+    }
   ];
 
   getName(id: number) {

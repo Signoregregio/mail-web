@@ -17,136 +17,34 @@ export class MailService {
     return this.messages;
   }
 
-  // messages = [
-  // {
-  //   to: 'carlo.bonamico@gmail.com',
-  //   from: 'sonia.pini@nispro.it',
-  //   subject: 'Angular',
-  //   body: ' a b c ',
-  //   starred: false,
-  // },
-  // {
-  //   to: 'carlo.bonamico@gmail.com',
-  //   from: 'carlo.bonamico@nispro.it',
-  //   subject: 'Typescript',
-  //   body: ' a b c d e f  ',
-  //   starred: false,
-  // },
-  // {
-  //   to: 'carlo.bonamico@gmail.com',
-  //   from: 'sonia.pini@nispro.it',
-  //   subject: 'Flexbox how-to',
-  //   body: ' a b c d e f  ',
-  //   starred: false,
-  // },
-  // {
-  //   to: 'carlo.bonamico@gmail.com',
-  //   from: 'sonia.pini@nispro.it',
-  //   subject: 'Re: ES6 tutorial',
-  //   body: ' a b c d e f  ',
-  //   starred: false,
-  // },
-  // ];
+  async getMessagesByFolder(folderName: string) {
+    let promise = this.getMessages();
+    let filteredMail = await promise;
 
-  // getMessages() {
-  //   return this.messages;
-  // }
-
-    async getMessagesByFolder(folderName: string) {
-      console.log(this.messages)
-
-      let promise = this.getMessages()
-      console.log(typeof promise)
-      let filteredMail = await promise;
-      console.log(typeof filteredMail)
-    
-      filteredMail = filteredMail.filter((mail:any) => mail.folder.toLowerCase() === folderName.toLowerCase() );
-      console.log(filteredMail)
+    if (folderName.toLowerCase() === 'all messages') {
       return filteredMail;
+    }
+    filteredMail = filteredMail.filter(
+      (mail: any) => mail.folder.toLowerCase() === folderName.toLowerCase()
+    );
+    console.log("Sono presenti in questa cartella :\n\t\t\t\t\t" + filteredMail.length + "\temails");
+    return filteredMail;
   }
 
-  // async getMessagesByFolder(folderName: string) {
-
-
-    // console.log(this.messages.__zone_symbol__value)
-  //   var messagess = [
-  //     {
-  //       to: 'carlo.bonamico@gmail.com',
-  //       from: 'sonia.pini@nispro.it',
-  //       subject: folderName + ' 1',
-  //       body: ' a b c ',
-  //       starred: false,
-  //     },
-  //     {
-  //       to: 'carlo.bonamico@gmail.com',
-  //       from: 'carlo.bonamico@nispro.it',
-  //       subject: folderName + ' 2',
-  //       body: ' a b c d e f  ',
-  //       starred: false,
-  //     },
-  //     {
-  //       to: 'carlo.bonamico@gmail.com',
-  //       from: 'sonia.pini@nispro.it',
-  //       subject: folderName + ' 3',
-  //       body: ' a b c ',
-  //       starred: false,
-  //     },
-  //     {
-  //       to: 'carlo.bonamico@gmail.com',
-  //       from: 'carlo.bonamico@nispro.it',
-  //       subject: folderName + ' 4',
-  //       body: ' a b c d e f  ',
-  //       starred: false,
-  //     },
-  //     {
-  //       to: 'carlo.bonamico@gmail.com',
-  //       from: 'sonia.pini@nispro.it',
-  //       subject: folderName + ' 5',
-  //       body: ' a b c ',
-  //       starred: false,
-  //     },
-  //     {
-  //       to: 'carlo.bonamico@gmail.com',
-  //       from: 'carlo.bonamico@nispro.it',
-  //       subject: folderName + ' 6',
-  //       body: ' a b c d e f  ',
-  //       starred: false,
-  //     },
-  //   ];
-  //   return messagess;
-  // }
-
-  getMessagesBySearch(query: string) {
+    getMessagesBySearch(query: string, messages: any) {
     //TODO replace this with a call to MessageSearchService.searchMessages(query)
-    var messages = [
-      {
-        to: 'carlo.bonamico@gmail.com',
-        from: 'sonia.pini@nispro.it',
-        subject: query + ' 1',
-        body: ' a b c ',
-        starred: false,
-      },
-      {
-        to: 'carlo.bonamico@gmail.com',
-        from: 'carlo.bonamico@nispro.it',
-        subject: query + ' 2',
-        body: ' a b c d e f  ',
-        starred: false,
-      },
-      {
-        to: 'carlo.bonamico@gmail.com',
-        from: 'sonia.pini@nispro.it',
-        subject: query + ' 3',
-        body: ' a b c d e f  ',
-        starred: false,
-      },
-    ];
+    console.log(query);
+    console.log(messages.length);
+    messages = messages.filter(
+      (mail: any) =>
+        mail.subject.toLowerCase().includes(query.toLowerCase())
+    );
+    console.log("Sono presenti in questa query :\n\t\t\t\t\t" + messages.length + "\temails");
     return messages;
   }
 
-  mailDelete(id: Number){
-    this.mailUrl
-    this.messages = this.http.delete<any>((this.mailUrl + `/${id}`)).toPromise();
-
+  mailDelete(id: Number) {
+    this.mailUrl;
+    this.messages = this.http.delete<any>(this.mailUrl + `/${id}`).toPromise();
   }
 }

@@ -6,12 +6,12 @@
       <app-search-panel
         class="horizontal-center"
         default-query=" defaultQuery "
+        (queryInserted)= "onQueryChange($event)"
         >
-        <!-- on-search-start="search(query)" -->
       </app-search-panel>
 
-      <div class="right-align" ng-controller="AccountController as accountCtrl">
-        <!-- {{ accountCtrl.accountEmail }} -->User
+      <div class="right-align">
+        user.email
       </div>
     </header>
 

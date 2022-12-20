@@ -1,3 +1,10 @@
-<form action="">
-    <input type="search" placeholder="Search..." class="search-input">
-</form>
+
+  <input
+    type="search"
+    placeholder="Search..."
+    class="search-input"
+    (ngModelChange)="onChange($event)"
+    [(ngModel)]="query"
+    [value]="query"
+    name="query"
+  />

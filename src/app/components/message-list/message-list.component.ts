@@ -6,7 +6,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 })
 export class MessageListComponent implements OnInit, OnChanges {
   constructor() {}
-  mailsShowed = 3;
+  mailsShowed = 5;
   sliceStart = 0;
   sliceEnd = this.mailsShowed;
   todayDate = new Date();
