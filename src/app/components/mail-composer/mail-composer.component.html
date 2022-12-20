@@ -1,67 +1,51 @@
 <div class="message">
   <div class="message-header">New Email</div>
   <hr />
-  <form
-    #formMail="ngForm"
-    (ngSubmit)="onSubmit(formMail)"
-    [ngClass]="{ 'ng-invalid': subjectError || receiverError || bodyError }"
-  >
-    <div [ngClass]="{ 'ng-invalid': subjectError }">
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <div>
       <label for="subject"></label
       ><input
         type="text"
-        name="subject"
         id="subject"
         placeholder="Subject..."
         class="new-mail"
-        minlength="4"
-        required
-        [(ngModel)]="newMessage.subject"
-        [disabled]="isReplyng || isForwarding"
+        formControlName="subject"
       />
-      <span [hidden]="!subjectError" class="inputError"
+      <span *ngIf="!signupForm.get('subject').valid && signupForm.get('subject').touched" class="inputError"
         ><i>*Missing camp</i></span
       >
     </div>
     <br />
-    <div [ngClass]="{ 'ng-invalid': receiverError }">
+    <div>
       <label for="to"></label>
       <input
         type="mail"
-        name="to"
         id="to"
         placeholder="Send this email to..."
         class="new-mail"
-        required
         email
-        [(ngModel)]="newMessage.to"
-        [disabled]="isReplyng"
-        #email="ngModel"
+        formControlName="email"
       />
-      <span *ngIf="!email.valid && email.touched" class="inputError"
+      <span *ngIf="!signupForm.get('email').valid && signupForm.get('email').touched" class="inputError"
         ><i>*Wrong format or missing camp </i></span
       >
     </div>
     <br />
-    <div [ngClass]="{ 'ng-invalid': bodyError }">
+    <div>
       <textarea
         name="body"
         id="body"
         cols="100%"
         rows="8"
         class="message-body"
-        ngModel
         placeholder="Your email body here..."
         class="message-body"
-        minlength="1"
-        [(ngModel)]="newMessage.body"
-        [disabled]="isForwarding"
-        required
+        formControlName="body"
       ></textarea>
-      <span [hidden]="!bodyError" class="inputError"><i>*Invalid body</i></span>
+      <span class="inputError" *ngIf="!signupForm.get('body').valid && signupForm.get('body').touched"><i>*Invalid body</i></span>
     </div>
-    <input type="submit" class="btnSubmit" value="Send" [disabled]="!formMail.valid"/>
-    <input type="button" class="btnSubmit" value="Cancel" (click)="formMail.reset(); onCancel()" />
+    <input type="submit" class="btnSubmit" value="Send" [disabled]="!signupForm.valid"/>
+    <input type="button" class="btnSubmit" value="Cancel" />
     <input type="button" class="btnSubmit" value="Save" />
   </form>
 </div>

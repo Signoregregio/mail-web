@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-mail-composer',
@@ -17,58 +18,28 @@ export class MailComposerComponent implements OnInit {
     subject: '',
     body: '',
   };
-
   @Input()
   public isReplyng: boolean = false;
-  
   @Input()
   public isForwarding: boolean = false;
 
-  ngOnInit(): void {}
+  signupForm: FormGroup;
 
-  subjectError: boolean = false;
-  receiverError: boolean = false;
-  bodyError: boolean = false;
+  ngOnInit(): void {
+    this.signupForm = new FormGroup({
+      'subject': new FormControl({value: this.newMessage.subject, disabled: (this.isReplyng || this.isForwarding)}, [Validators.required, Validators.minLength(4)]),
+      'email': new FormControl({value : this.newMessage.to, disabled: this.isReplyng}, [Validators.required, Validators.email]),
+      'body': new FormControl({value: this.newMessage.body, disabled: this.isForwarding}, [Validators.required, Validators.minLength(1)])
+    });
+  }
 
-  mailRegex =
-    /^[a-zA-Z0-9.!#$%&'*+=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
-
-  onSubmit(formMail: any) {
-    this.checkSubject(formMail.value.subject);
-    this.checkTo(formMail.value.to);
-    this.checkBody(formMail.value.body);
-
-    if (this.subjectError || this.receiverError || this.bodyError) {
-      return console.log('error: form is not complete or correct')
-    }
-    this.sendEmail.emit(formMail.value);
+ 
+  onSubmit(){
+    console.log(this.signupForm)
+    this.sendEmail.emit(this.signupForm.value);
   }
 
   onCancel() {
     this.cancelEmail.emit();
-  }
-
-  checkSubject(subject: string) {
-    if (subject === undefined || subject.length <= 3) {
-      this.subjectError = true;
-    } else {
-      this.subjectError = false;
-    }
-  }
-
-  checkTo(to: string) {
-    if (!this.mailRegex.test(to)) {
-      this.receiverError = true;
-    } else {
-      this.receiverError = false;
-    }
-  }
-
-  checkBody(body: string) {
-    if (body === '') {
-      this.bodyError = true;
-    } else {
-      this.bodyError = false;
-    }
   }
 }
