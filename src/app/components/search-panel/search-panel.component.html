@@ -3,8 +3,5 @@
     type="search"
     placeholder="Search..."
     class="search-input"
-    (ngModelChange)="onChange($event)"
-    [(ngModel)]="query"
-    [value]="query"
-    name="query"
-  />
+    (keyup)="onChange($event)"
+    />
