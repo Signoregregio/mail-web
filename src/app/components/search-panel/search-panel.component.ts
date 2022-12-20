@@ -9,7 +9,6 @@ export class SearchPanelComponent implements OnInit {
   @Output()
   queryInserted = new EventEmitter<any>();
 
-  query = '';
   private subjectKeyUp = new Subject<any>();
 
   ngOnInit(): void {
