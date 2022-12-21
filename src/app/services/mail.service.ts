@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { lastValueFrom } from 'rxjs';
 import { LogService } from './log.service';
 @Injectable()
 export class MailService {
@@ -12,8 +13,8 @@ export class MailService {
     this.logService.log(message);
   }
 
-  async getMessages() {
-    this.messages = this.http.get<any>(this.mailUrl).toPromise();
+  getMessages() {
+    this.messages = lastValueFrom(this.http.get<any>(this.mailUrl));
     return this.messages;
   }
 
@@ -27,19 +28,26 @@ export class MailService {
     filteredMail = filteredMail.filter(
       (mail: any) => mail.folder.toLowerCase() === folderName.toLowerCase()
     );
-    console.log("Sono presenti in questa cartella :\n\t\t\t\t\t" + filteredMail.length + "\temails");
+    console.log(
+      'Sono presenti in questa cartella :\n\t\t\t\t\t' +
+        filteredMail.length +
+        '\temails'
+    );
     return filteredMail;
   }
 
-    getMessagesBySearch(query: string, messages: any) {
+  getMessagesBySearch(query: string, messages: any) {
     //TODO replace this with a call to MessageSearchService.searchMessages(query)
     console.log(query);
     console.log(messages.length);
-    messages = messages.filter(
-      (mail: any) =>
-        mail.subject.toLowerCase().includes(query.toLowerCase())
+    messages = messages.filter((mail: any) =>
+      mail.subject.toLowerCase().includes(query.toLowerCase())
     );
-    console.log("Sono presenti in questa query :\n\t\t\t\t\t" + messages.length + "\temails");
+    console.log(
+      'Sono presenti in questa query :\n\t\t\t\t\t' +
+        messages.length +
+        '\temails'
+    );
     return messages;
   }
 
@@ -50,7 +58,8 @@ export class MailService {
 
   async changeStar(mail: any) {
     mail.starred = !mail.starred;
-    let promise =  this.http.put<any>(this.mailUrl + `/${mail.id}`, mail).toPromise();
+    let promise = lastValueFrom(this.http
+      .put<any>(this.mailUrl + `/${mail.id}`, mail));
     await promise;
   }
 }

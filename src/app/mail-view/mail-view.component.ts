@@ -28,7 +28,6 @@ export class MailViewComponent implements OnInit {
   forwardMail: any;
 
   async ngOnInit(): Promise<any> {
-    this.messages = await this.mailList.getMessages();
     this.messages = await this.mailList.getMessagesByFolder('inbox');
     this.messagesLoaded = Promise.resolve(true);
   }
