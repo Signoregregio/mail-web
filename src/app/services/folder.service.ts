@@ -1,9 +1,20 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class FolderService {
   constructor() {}
 
+  private currentFolderName$ = new Subject<string>();
+
+  getCurrentFolderName(){
+    return this.currentFolderName$.asObservable()
+  }
+  
+  setCurrentFolderName(folderName: string){ 
+    this.currentFolderName$.next(folderName);
+  }
+  
   list = [
     {
       name: 'Inbox',

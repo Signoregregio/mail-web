@@ -13,27 +13,31 @@ export class MailService {
     this.logService.log(message);
   }
 
-
   getMessages(): Observable<any> {
     return this.http.get<any>(this.mailUrl);
   }
 
-  // sendMessages(mail: any) {
-  //   this.messages = lastValueFrom(this.http.post<any>(this.mailUrl, mail));
-  //   return this.messages;
-  // }
-
-  getMessagesByFolder(folderName: string): Observable<any> {
-    console.log(folderName)
-    return this.http
-      .get<any>(this.mailUrl).pipe(map(data => data.filter((value: any) => value.folder === folderName)))
+  sendMessages(mail: any) : Observable<any> {
+    return this.http.post<any>(this.mailUrl, mail);
 
   }
 
+  getMessagesByFolder(folderName: string): Observable<any> {
+    console.log(folderName);
+    if (folderName === 'all messages') {
+      return this.http
+        .get<any>(this.mailUrl)
+        .pipe(map((data) => data.filter((value: any) => !!value.folder)));
+    }
+    return this.http
+      .get<any>(this.mailUrl)
+      .pipe(
+        map((data) => data.filter((value: any) => value.folder === folderName))
+      );
+  }
+
   getMessagesBySearch(query: string, messages: any) {
-    //TODO replace this with a call to MessageSearchService.searchMessages(query)
-    console.log(query);
-    console.log(messages.length);
+    console.log('query is: ' + query);
     messages = messages.filter((mail: any) =>
       mail.subject.toLowerCase().includes(query.toLowerCase())
     );
@@ -45,11 +49,8 @@ export class MailService {
     return messages;
   }
 
-  mailDelete(id: Number) {
-    this.mailUrl;
-    this.messages = lastValueFrom(
-      this.http.delete<any>(this.mailUrl + `/${id}`)
-    );
+  mailDelete(id: Number): Observable<any> {
+    return this.http.delete<any>(this.mailUrl + `/${id}`);
   }
 
   async changeStar(mail: any) {
