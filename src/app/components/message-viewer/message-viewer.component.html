@@ -8,7 +8,7 @@
         <div> To: {{message.to}} </div>
         <div> {{ todayDate | date : 'ccc MM/dd/yy, HH:mm ' }} </div><!-- TODO date formatted with filter -->
         <div>
-        <app-common-star [entity]="message.starred"></app-common-star>
+        <app-common-star [entity]="message.starred" (starEmail)="onStarEmail(message.id)"></app-common-star>
         <button class="btn" (click)="onBtnPressed($event)">Reply</button>
         <button class="btn" (click)="onBtnPressed($event)">Forward</button>
         <button class="btn" (click)="onBtnPressed($event)">Delete</button>

@@ -15,16 +15,18 @@ export class MessageListComponent implements OnInit, OnChanges {
   public messages: any[];
   @Output()
   selectEmail = new EventEmitter<any>();
+  @Output()
+  starEmail = new EventEmitter<any>();
 
   ngOnInit(): void {}
   ngOnChanges(changes: SimpleChanges): void {
   }
-  onStarEmail(entity: boolean) {
-    console.log(entity);
+  
+  onStarEmail(id: number) {
+    this.starEmail.emit(id)
   }
 
   onSelectEmail(index: number) {
-    console.log(index)
     this.selectEmail.emit(index);
   }
 

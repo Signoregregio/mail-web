@@ -98,4 +98,9 @@ export class MailViewComponent implements OnInit {
     console.log(this.mailToShow);
     this.displayCase = 'show';
   }
+
+  onStarEmail(id: number){
+    let mailToStar = (this.messages.filter((message) => message.id === id))[0]
+    this.mailList.changeStar(mailToStar);
+  }
 }

@@ -50,6 +50,7 @@
         <app-message-list
           [messages]="messages"
           (selectEmail)="onSelectEmail($event)"
+          (starEmail)="onStarEmail($event)"
         >
         </app-message-list>
         <div class="spacer">
@@ -60,6 +61,7 @@
             *ngSwitchCase="'show'"
             (btnPressed)="onBtnMessageViewerPressed($event)"
             [message]="mailToShow"
+            (starEmail)="onStarEmail($event)"
           >
           </app-message-viewer>
           <app-mail-composer

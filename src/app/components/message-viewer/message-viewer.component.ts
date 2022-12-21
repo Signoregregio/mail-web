@@ -9,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
 export class MessageViewerComponent implements OnInit {
 
   @Output()
+  starEmail = new EventEmitter<any>();
+  @Output()
   btnPressed = new EventEmitter<any>();
   @Input()
   public message: any;
@@ -17,12 +19,17 @@ export class MessageViewerComponent implements OnInit {
   currentMessageIndex = 0;
 
 
-  constructor() { }
+  constructor() {}
   
   onBtnPressed (event: any){
     this.btnPressed.emit(event.target.textContent)
   }
+
+  onStarEmail (id: number){
+    this.starEmail.emit(id)
+  }
   
   ngOnInit(): void {
   }
+
 }

@@ -14,7 +14,6 @@
     "
     class="message"
     appHighlightMailList
-
   >
     <!-- [ngClass]="{'message-selected' : message.selected, 
                'message-list-odd' : $odd}"> -->
@@ -27,12 +26,14 @@
 
     <app-common-star
       [entity]="message.starred"
-      (starEmail)="onStarEmail($event)"
+      (starEmail)="onStarEmail(message.id)"
     ></app-common-star>
     <span (click)="onSelectEmail($index + sliceStart)">
       <span> {{ $index + 1 + sliceStart }} From: {{ message.from }}</span>
       <span> ---- {{ message.subject }}</span>
-      <span class="align-right"> {{ todayDate | date: 'ccc MM/dd/yy, HH:mm' }} </span>      
+      <span class="align-right">
+        {{ todayDate | date : "ccc MM/dd/yy, HH:mm" }}
+      </span>
     </span>
     <div [hidden]="messages.length > 0">No results</div>
   </div>

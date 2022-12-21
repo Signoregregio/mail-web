@@ -47,4 +47,10 @@ export class MailService {
     this.mailUrl;
     this.messages = this.http.delete<any>(this.mailUrl + `/${id}`).toPromise();
   }
+
+  async changeStar(mail: any) {
+    mail.starred = !mail.starred;
+    let promise =  this.http.put<any>(this.mailUrl + `/${mail.id}`, mail).toPromise();
+    await promise;
+  }
 }
