@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable()
 export class FolderService {
@@ -33,6 +34,17 @@ export class FolderService {
       index: 5,
     }
   ];
+
+  private currentFolderNameSource = new Subject<string>();
+  currentFolderName$ = this.currentFolderNameSource.asObservable();
+
+  // getCurrentFolderName(){
+  //   return this.currentFolderName$.asObservable();
+  // }
+
+  setCurrentFolderName(folderName: string){
+    this.currentFolderNameSource.next(folderName);
+  }
 
   getName(id: number) {
     let name: string;

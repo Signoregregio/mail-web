@@ -4,4 +4,6 @@ class="glyphicon"
 [ngClass]="{'star' : !entity, 'star-starred' : entity}" 
 (click)="onToggleStar()"
 value="☆"
+[value]="miao"
 >
+<div>miao è {{miao}}</div>
