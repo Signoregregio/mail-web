@@ -71,13 +71,16 @@ export class MailViewComponent implements OnInit {
   onSendEmail(email: any) {
     console.log(email);
     let newMail = {
-      to: email.to,
+      to: email.email,
       from: 'l.scianna545344@gmail.com',
       subject: email.subject,
       body: email.body,
       starred: false,
+      folder: this.currentFolder,
     };
     this.messages = [...this.messages, newMail];
+    console.log(newMail)
+    this.mailList.sendMessages(newMail);
     console.log(this.messages);
   }
 

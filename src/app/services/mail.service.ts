@@ -18,6 +18,11 @@ export class MailService {
     return this.messages;
   }
 
+  sendMessages(mail: any) {
+    this.messages = lastValueFrom(this.http.post<any>(this.mailUrl, mail));
+    return this.messages;
+  }
+
   async getMessagesByFolder(folderName: string) {
     let promise = this.getMessages();
     let filteredMail = await promise;
@@ -53,7 +58,7 @@ export class MailService {
 
   mailDelete(id: Number) {
     this.mailUrl;
-    this.messages = this.http.delete<any>(this.mailUrl + `/${id}`).toPromise();
+    this.messages = lastValueFrom(this.http.delete<any>(this.mailUrl + `/${id}`));
   }
 
   async changeStar(mail: any) {

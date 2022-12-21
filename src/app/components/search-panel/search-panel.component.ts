@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { debounceTime, map, of, Subject } from 'rxjs';
+import { debounceTime, map, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-search-panel',
