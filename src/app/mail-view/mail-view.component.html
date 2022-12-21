@@ -25,10 +25,10 @@
 
         <section class="folder-list">
           <app-folder-list
-            [currentFolder]="currentFolder"
+            [currentFolderPosition]="currentFolderPosition"
             [allowCreate]="false"
             [folderList]="folderList.list"
-            (folderSelected)="onFolderSelected($event)"
+            (folderSelected)="onFolderSelected()"
           >
             <h3 title>Folder list</h3>
           </app-folder-list>
@@ -36,10 +36,10 @@
 
         <section class="folder-list">
           <app-folder-list
-            [currentFolder]="currentFolder"
+            [currentFolderPosition]="currentFolderPosition"
             [allowCreate]="true"
             [folderList]="folderList.customList"
-            (folderSelected)="onFolderSelected($event)"
+            (folderSelected)="onFolderSelected()"
           >
             <h3 title>Custom list</h3>
           </app-folder-list>
@@ -47,12 +47,14 @@
       </nav>
 
       <section class="horizontal-center vertical-container">
-        <app-message-list
+        <!-- <app-message-list
           [messages]="messages"
           (selectEmail)="onSelectEmail($event)"
           (starEmail)="onStarEmail($event)"
         >
-        </app-message-list>
+        </app-message-list> -->
+        <router-outlet 
+        ></router-outlet>
         <div class="spacer">
           <hr />
         </div>

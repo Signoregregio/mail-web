@@ -1,10 +1,10 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-message-list',
   templateUrl: './message-list.component.html',
 })
-export class MessageListComponent implements OnInit, OnChanges {
+export class MessageListComponent implements OnInit{
   constructor() {}
   mailsShowed = 5;
   sliceStart = 0;
@@ -19,8 +19,7 @@ export class MessageListComponent implements OnInit, OnChanges {
   starEmail = new EventEmitter<any>();
 
   ngOnInit(): void {}
-  ngOnChanges(changes: SimpleChanges): void {
-  }
+
   
   onStarEmail(id: number) {
     this.starEmail.emit(id)
@@ -43,4 +42,10 @@ export class MessageListComponent implements OnInit, OnChanges {
       this.sliceEnd -= this.mailsShowed;
     }
   }
+
+  resetPage(){
+    this.sliceStart = 0;
+    this.sliceEnd = this.mailsShowed;
+  }
+
 }

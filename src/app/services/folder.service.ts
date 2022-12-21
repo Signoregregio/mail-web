@@ -51,4 +51,22 @@ export class FolderService {
     });
     return name;
   }
+  getFolderPosition(folderName: string) {
+    let position = 0;
+    let count = 0;
+    this.list.map((folder) => {
+      if (folder.name === folderName ) {
+        position = count++;
+      }
+      return position;
+    });
+    
+    this.customList.map((folder) => {
+      if (folder.name === folderName ) {
+        position = count++;
+      }
+      return position;
+    });
+    return position;
+  }
 }

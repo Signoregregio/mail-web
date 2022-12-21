@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { MessageListComponent } from './components/message-list/message-list.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { MailViewComponent } from './mail-view/mail-view.component';
 import { AuthGuard } from './services/auth-guard';
@@ -8,7 +9,10 @@ const routes: Routes = [
   { path: '', redirectTo: '/mailview', pathMatch: 'full' },
   {
     path: 'mailview',
-    component: MailViewComponent
+    component: MailViewComponent,
+    children: [
+      {path: ':folder/:page', component: MessageListComponent}
+    ]
   },
   { path: '**', component: PageNotFoundComponent },
 ];

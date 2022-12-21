@@ -1,16 +1,17 @@
 <ng-content select="[title]"></ng-content>
 
 <ul class="nav nav-pills nav-stacked">
-  <li *ngFor="let item of folderList; let $index = index">
+  <li *ngFor="let folder of folderList; let $index = index">
     <div
       class="folder"
-      (click)="onFolderSelected($event)"
-      [ngClass]="{ 'folder-selected': item.index == currentFolder }"
-      [id]="item.index"
-      [title]="item.name"
+      (click)="onFolderSelected()"
+      [ngClass]="{ 'folder-selected': folder.index == currentFolderPosition }"
+      [id]="folder.index"
+      [title]="folder.name"
       appHighlightFolder
+      [routerLink]="[folder.name.toLowerCase(), 0]"
     >
-      {{ $index }} - {{ item.name }}
+      {{ $index }} - {{ folder.name }}
     </div>
   </li>
   <li class="folder" *ngIf="allowCreate">

@@ -4,6 +4,7 @@ import { MailService } from 'src/app/services/mail.service';
 import { TemplateService } from '../services/template.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { AuthGuard } from '../services/auth-guard';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-mail-view',
@@ -15,19 +16,36 @@ export class MailViewComponent implements OnInit {
     protected folderList: FolderService,
     protected mailList: MailService,
     protected mailTemplate: TemplateService,
-    private route: ActivatedRoute,
-  ) {}
+    private route: ActivatedRoute
+  ) {
+    // route.paramMap.pipe(map(paramMap => paramMap.get('folder'))).subscribe(folder => {this.currentFolder = folder;
+    // console.log(this.currentFolder)
+    // console.log(folder)
+  // })
+  }
 
   messagesLoaded: Promise<boolean>;
   messages: any[];
-  currentFolder = 0;
+  currentFolderPosition = 0;
+  currentFolder: string = 'inbox';
+  currentPage: number;
   allowCreate: boolean;
   displayCase: string;
   mailToShow: any;
   replyMail: any;
   forwardMail: any;
 
+
   async ngOnInit(): Promise<any> {
+    this.currentFolder = this.route.snapshot.paramMap['folder'];
+    this.currentPage = this.route.snapshot.params['page'];
+    console.log(this.currentFolder)
+    console.log(this.currentPage)
+
+    // this.route.paramMap.subscribe(params => {
+    //   console.log(params.get('folder'))
+    // })
+
     this.messages = await this.mailList.getMessagesByFolder('inbox');
     this.messagesLoaded = Promise.resolve(true);
   }
@@ -41,31 +59,37 @@ export class MailViewComponent implements OnInit {
         this.displayCase = 'reply';
         break;
       case 'Forward':
-        this.forwardMail = this.mailTemplate.getForwardTemplate(this.mailToShow);
+        this.forwardMail = this.mailTemplate.getForwardTemplate(
+          this.mailToShow
+        );
         console.log(this.forwardMail);
-        this.displayCase = 'forward'
+        this.displayCase = 'forward';
         break;
       case 'Delete':
         this.messages.splice(this.mailToShow.index, 1);
         this.mailList.mailDelete(this.mailToShow.index);
         console.log(this.messages);
         this.displayCase = 'delete';
-        
+
         break;
     }
   }
 
-  async onFolderSelected(folderSelected: number) {
-    this.currentFolder = folderSelected;
-    let folderName = this.folderList.getName(folderSelected);
-    this.messages = await this.mailList.getMessagesByFolder(folderName);
-    this.mailList.log(folderName);
+  async onFolderSelected() {
+    // la folder name la prenderei dal link e non dall'event, 
+    // quindi avrei un evento senza variabili. però devo comunque 
+    // caricare la mock fitlrata ogni volta che clicco sulla folder.
+    // quindi qua cambio message che mi cambiera' la lista
+    console.log(this.currentFolder)
+    this.currentFolderPosition = this.folderList.getFolderPosition(this.currentFolder);
+    this.messages = await this.mailList.getMessagesByFolder(this.currentFolder);
+    this.mailList.log(this.currentFolder);
   }
-  async onQueryChange(query: string){
-    let folderName = this.folderList.getName(this.currentFolder);
-    this.messages = await this.mailList.getMessagesByFolder(folderName);
 
-    this.messages = this.mailList.getMessagesBySearch(query, this.messages)
+  async onQueryChange(query: string) {
+    this.messages = await this.mailList.getMessagesByFolder(this.currentFolder);
+
+    this.messages = this.mailList.getMessagesBySearch(query, this.messages);
   }
 
   onSendEmail(email: any) {
@@ -98,8 +122,8 @@ export class MailViewComponent implements OnInit {
     this.displayCase = 'show';
   }
 
-  onStarEmail(id: number){
-    let mailToStar = (this.messages.filter((message) => message.id === id))[0]
+  onStarEmail(id: number) {
+    let mailToStar = this.messages.filter((message) => message.id === id)[0];
     this.mailList.changeStar(mailToStar);
   }
 }
