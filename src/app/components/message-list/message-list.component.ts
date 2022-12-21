@@ -1,15 +1,17 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FolderService } from 'src/app/services/folder.service';
 
 @Component({
   selector: 'app-message-list',
   templateUrl: './message-list.component.html',
 })
-export class MessageListComponent implements OnInit, OnChanges {
-  constructor() {}
+export class MessageListComponent implements OnInit {
+  constructor(private folderService : FolderService) {}
   mailsShowed = 5;
   sliceStart = 0;
   sliceEnd = this.mailsShowed;
   todayDate = new Date();
+  miao: string;
 
   @Input()
   public messages: any[];
@@ -18,10 +20,12 @@ export class MessageListComponent implements OnInit, OnChanges {
   @Output()
   starEmail = new EventEmitter<any>();
 
-  ngOnInit(): void {}
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnInit(): void {
+    this.folderService.getCurrentFolderName().subscribe(
+      (data) => this.miao = data
+    );
   }
-  
+
   onStarEmail(id: number) {
     this.starEmail.emit(id)
   }

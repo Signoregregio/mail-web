@@ -8,22 +8,20 @@ import { FolderService } from 'src/app/services/folder.service';
   templateUrl: './common-star.component.html',
 })
 export class CommonStarComponent implements OnInit {
-  constructor(private folderService: FolderService) {
-
+  constructor() {
   }
 
-  miao: string;
   count: number;
   ngOnInit(): void {
-    this.folderService.currentFolderName$.subscribe(
-      (data) => this.miao = data
-    );
+
   }
 
   @Input()
   entity: boolean;
   @Output()
   starEmail = new EventEmitter<any>();
+  @Input()
+  miao : string;
 
   onToggleStar() {
     this.entity = !this.entity;

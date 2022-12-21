@@ -35,15 +35,14 @@ export class FolderService {
     }
   ];
 
-  private currentFolderNameSource = new Subject<string>();
-  currentFolderName$ = this.currentFolderNameSource.asObservable();
+  private currentFolderName$ = new Subject<string>();
 
-  // getCurrentFolderName(){
-  //   return this.currentFolderName$.asObservable();
-  // }
+  getCurrentFolderName(){
+    return this.currentFolderName$.asObservable();
+  }
 
   setCurrentFolderName(folderName: string){
-    this.currentFolderNameSource.next(folderName);
+    this.currentFolderName$.next(folderName);
   }
 
   getName(id: number) {

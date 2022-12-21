@@ -14,8 +14,7 @@ export class MailService {
   }
 
   getMessages() {
-    this.messages = lastValueFrom(this.http.get<any>(this.mailUrl));
-    return this.messages;
+    return lastValueFrom(this.http.get<any>(this.mailUrl));
   }
 
   async getMessagesByFolder(folderName: string) {

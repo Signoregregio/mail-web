@@ -27,6 +27,7 @@
     <app-common-star
       [entity]="message.starred"
       (starEmail)="onStarEmail(message.id)"
+      [miao]="miao"
     ></app-common-star>
     <span (click)="onSelectEmail($index + sliceStart)">
       <span> {{ $index + 1 + sliceStart }} From: {{ message.from }}</span>
