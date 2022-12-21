@@ -31,7 +31,7 @@ export class FolderService {
     {
       name: 'All messages',
       index: 5,
-    }
+    },
   ];
 
   getName(id: number) {
@@ -42,7 +42,7 @@ export class FolderService {
       }
       return name;
     });
-    
+
     this.customList.map((folder) => {
       if (folder.index === +id) {
         name = folder.name;
@@ -50,5 +50,22 @@ export class FolderService {
       return name;
     });
     return name;
+  }
+
+  getNumber(folderName: string) {
+    let position: number;
+    this.list.map((folder) => {
+      if (folder.name.toLowerCase() === folderName.toLowerCase()) {
+        position = folder.index;
+      }
+      return position;
+    });
+    this.customList.map((folder) => {
+      if (folder.name.toLowerCase() === folderName.toLowerCase()) {
+        position = folder.index;
+      }
+      return position;
+    });
+    return position;
   }
 }

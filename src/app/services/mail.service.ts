@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { lastValueFrom } from 'rxjs';
+import { filter, lastValueFrom, map, Observable } from 'rxjs';
 import { LogService } from './log.service';
 @Injectable()
 export class MailService {
@@ -13,32 +13,21 @@ export class MailService {
     this.logService.log(message);
   }
 
-  getMessages() {
-    this.messages = lastValueFrom(this.http.get<any>(this.mailUrl));
-    return this.messages;
+
+  getMessages(): Observable<any> {
+    return this.http.get<any>(this.mailUrl);
   }
 
-  sendMessages(mail: any) {
-    this.messages = lastValueFrom(this.http.post<any>(this.mailUrl, mail));
-    return this.messages;
-  }
+  // sendMessages(mail: any) {
+  //   this.messages = lastValueFrom(this.http.post<any>(this.mailUrl, mail));
+  //   return this.messages;
+  // }
 
-  async getMessagesByFolder(folderName: string) {
-    let promise = this.getMessages();
-    let filteredMail = await promise;
+  getMessagesByFolder(folderName: string): Observable<any> {
+    console.log(folderName)
+    return this.http
+      .get<any>(this.mailUrl).pipe(map(data => data.filter((value: any) => value.folder === folderName)))
 
-    if (folderName.toLowerCase() === 'all messages') {
-      return filteredMail;
-    }
-    filteredMail = filteredMail.filter(
-      (mail: any) => mail.folder.toLowerCase() === folderName.toLowerCase()
-    );
-    console.log(
-      'Sono presenti in questa cartella :\n\t\t\t\t\t' +
-        filteredMail.length +
-        '\temails'
-    );
-    return filteredMail;
   }
 
   getMessagesBySearch(query: string, messages: any) {
@@ -58,13 +47,16 @@ export class MailService {
 
   mailDelete(id: Number) {
     this.mailUrl;
-    this.messages = lastValueFrom(this.http.delete<any>(this.mailUrl + `/${id}`));
+    this.messages = lastValueFrom(
+      this.http.delete<any>(this.mailUrl + `/${id}`)
+    );
   }
 
   async changeStar(mail: any) {
     mail.starred = !mail.starred;
-    let promise = lastValueFrom(this.http
-      .put<any>(this.mailUrl + `/${mail.id}`, mail));
+    let promise = lastValueFrom(
+      this.http.put<any>(this.mailUrl + `/${mail.id}`, mail)
+    );
     await promise;
   }
 }

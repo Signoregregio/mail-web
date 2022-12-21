@@ -9,7 +9,7 @@ export class FolderListComponent implements OnInit {
   constructor() {}
 
   @Input()
-  public currentFolder: number;
+  public currentFolderNumber: number;
   @Input()
   public allowCreate: boolean;
   @Input()
@@ -22,7 +22,7 @@ export class FolderListComponent implements OnInit {
   folderId: number;
 
   onFolderSelected(event: any) {
-    (this.folderId = event.target.id);
+    (this.folderId = event.target.title.toLowerCase());
     this.folderSelected.emit(this.folderId);
   }
 

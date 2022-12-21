@@ -5,7 +5,7 @@
     <div
       class="folder"
       (click)="onFolderSelected($event)"
-      [ngClass]="{ 'folder-selected': item.index == currentFolder }"
+      [ngClass]="{ 'folder-selected': item.index == currentFolderNumber }"
       [id]="item.index"
       [title]="item.name"
       appHighlightFolder

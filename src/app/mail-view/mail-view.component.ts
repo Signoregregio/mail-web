@@ -20,16 +20,21 @@ export class MailViewComponent implements OnInit {
 
   messagesLoaded: Promise<boolean>;
   messages: any[];
-  currentFolder = 0;
+  currentFolderName = 'inbox';
+  currentFolderNumber = 0;
   allowCreate: boolean;
   displayCase: string;
   mailToShow: any;
   replyMail: any;
   forwardMail: any;
+  allowPage = false;
 
-  async ngOnInit(): Promise<any> {
-    this.messages = await this.mailList.getMessagesByFolder('inbox');
-    this.messagesLoaded = Promise.resolve(true);
+  ngOnInit(): void {
+    this.mailList.getMessagesByFolder(this.currentFolderName).subscribe({
+      next: (data) => this.messages = data,
+      error: (err: Error) => console.error('Observerer ngOnInit got an Error' + err),
+      complete: () => this.allowPage = true,  
+      })
   }
 
   onBtnMessageViewerPressed(value: string) {
@@ -55,15 +60,15 @@ export class MailViewComponent implements OnInit {
     }
   }
 
-  async onFolderSelected(folderSelected: number) {
-    this.currentFolder = folderSelected;
-    let folderName = this.folderList.getName(folderSelected);
-    this.messages = await this.mailList.getMessagesByFolder(folderName);
-    this.mailList.log(folderName);
+  async onFolderSelected(folderNameSelected: string) {
+    this.currentFolderName = folderNameSelected;
+    this.currentFolderNumber = this.folderList.getNumber(folderNameSelected);
+    // this.messages = await this.mailList.getMessagesByFolder(folderName);
+    this.mailList.log(folderNameSelected);
   }
+
   async onQueryChange(query: string){
-    let folderName = this.folderList.getName(this.currentFolder);
-    this.messages = await this.mailList.getMessagesByFolder(folderName);
+    // this.messages = await this.mailList.getMessagesByFolder(folderName);
 
     this.messages = this.mailList.getMessagesBySearch(query, this.messages)
   }
@@ -76,11 +81,11 @@ export class MailViewComponent implements OnInit {
       subject: email.subject,
       body: email.body,
       starred: false,
-      folder: this.currentFolder,
+      folder: this.currentFolderName,
     };
     this.messages = [...this.messages, newMail];
     console.log(newMail)
-    this.mailList.sendMessages(newMail);
+    // this.mailList.sendMessages(newMail);
     console.log(this.messages);
   }
 

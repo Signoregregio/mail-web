@@ -1,4 +1,4 @@
-<div *ngIf="messagesLoaded | async">
+<div *ngIf="allowPage">
   <div class="page-container">
     <header class="horizontal-container">
       <app-mail-logo></app-mail-logo>
@@ -25,7 +25,7 @@
 
         <section class="folder-list">
           <app-folder-list
-            [currentFolder]="currentFolder"
+            [currentFolderNumber]="currentFolderNumber"
             [allowCreate]="false"
             [folderList]="folderList.list"
             (folderSelected)="onFolderSelected($event)"
@@ -36,7 +36,7 @@
 
         <section class="folder-list">
           <app-folder-list
-            [currentFolder]="currentFolder"
+            [currentFolderNumber]="currentFolderNumber"
             [allowCreate]="true"
             [folderList]="folderList.customList"
             (folderSelected)="onFolderSelected($event)"
