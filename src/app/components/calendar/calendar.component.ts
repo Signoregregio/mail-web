@@ -17,7 +17,7 @@ export class CalendarComponent implements OnInit {
   currentMonth = this.date.getMonth();
   currentYear = this.date.getFullYear();
   currentMonthReal: number;
-  currentDate;
+  currentDate: Date;
   
   ngOnInit() {
     this.createMonthArray();
@@ -33,15 +33,14 @@ export class CalendarComponent implements OnInit {
       }
     });
     this.currentDate = new Date(this.currentYear, this.currentMonthReal)
-  }
+    }
 
   createMonthArray() {
     this.allMonth = [];
     let monthNumber: number = 0;
     let year = this.currentYear - 1;
-    for (let i = 0; i < 36; i++) {
+    for (let j = 0; j < 36; j++) {
       let monthArray = [];
-      console.log(monthNumber + ' - ' + year);
       this.daysInMonth = new Date(year, monthNumber + 1, 0).getDate();
       for (let i = 1; i <= this.daysInMonth; i++) {
         let dayOfTheWeek = new Date(year, monthNumber, i).getDay();
@@ -65,10 +64,16 @@ export class CalendarComponent implements OnInit {
 
   onPrec() {
     this.currentMonth -= 1;
-    // this.getMonthCalendar();
+    this.currentMonthReal -= 1;
+    this.getCurrentMonth(this.currentMonthReal, this.currentYear)
   }
   onSucc() {
     this.currentMonth += 1;
-    // this.getMonthCalendar();
+    this.currentMonthReal += 1;
+    if(this.currentMonthReal === 12){
+      this.currentYear++;
+      this.currentMonthReal=0;
+    }
+    this.getCurrentMonth(this.currentMonthReal, this.currentYear)
   }
 }
