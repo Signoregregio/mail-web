@@ -4,6 +4,7 @@ import { MailService } from 'src/app/services/mail.service';
 import { TemplateService } from '../services/template.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { AuthGuard } from '../services/auth-guard';
+import { SpinnerStateService } from '../services/spinner-state.service';
 
 @Component({
   selector: 'app-mail-view',
@@ -16,6 +17,7 @@ export class MailViewComponent implements OnInit {
     protected mailList: MailService,
     protected mailTemplate: TemplateService,
     private route: ActivatedRoute,
+    private spinner: SpinnerStateService
   ) {}
 
   messagesLoaded: Promise<boolean>;
@@ -28,23 +30,27 @@ export class MailViewComponent implements OnInit {
   replyMail: any;
   forwardMail: any;
   allowPage = false;
-  
 
   myObserver = {
-    next: (data: any) => this.messages = data,
-    error: (err: Error) => console.error('Observerer ngOnInit got an Error' + err),
-    complete: () => this.mailList.log('Completed'), 
+    next: (data: any) => (this.messages = data),
+    error: (err: Error) =>
+      console.error('Observerer ngOnInit got an Error' + err),
+    complete: () => this.spinner.changeState(false),
   };
-
 
   ngOnInit(): void {
     this.mailList.getMessagesByFolder(this.currentFolderName).subscribe({
-      next: (data) => this.messages = data,
-      error: (err: Error) => console.error('Observerer ngOnInit got an Error' + err),
-      complete: () => this.allowPage = true,  
-      })
-    
-    this.folderList.getCurrentFolderName().subscribe(data => this.currentFolderName = data)
+      next: (data) => (this.messages = data),
+      error: (err: Error) =>
+        console.error('Observerer ngOnInit got an Error' + err),
+      complete: () => {
+        this.allowPage = true;
+      },
+    });
+
+    this.folderList
+      .getCurrentFolderName()
+      .subscribe((data) => (this.currentFolderName = data));
   }
 
   onBtnMessageViewerPressed(value: string) {
@@ -56,15 +62,25 @@ export class MailViewComponent implements OnInit {
         this.displayCase = 'reply';
         break;
       case 'Forward':
-        this.forwardMail = this.mailTemplate.getForwardTemplate(this.mailToShow);
+        this.forwardMail = this.mailTemplate.getForwardTemplate(
+          this.mailToShow
+        );
         console.log(this.forwardMail);
-        this.displayCase = 'forward'
+        this.displayCase = 'forward';
         break;
       case 'Delete':
+        this.spinner.changeState(true);
+
         this.messages.splice(this.mailToShow.index, 1);
         this.mailList.mailDelete(this.mailToShow.index).subscribe({
-          next: () =>  this.mailList.log(`mail with id ${this.mailToShow.id} has been removed from the mock correctly`),
-          error: (err: Error) => console.error('Observerer ngOnInit got an Error' + err),
+          next: () => {
+            this.mailList.log(
+              `mail with id ${this.mailToShow.id} has been removed from the mock correctly`
+            );
+            this.spinner.changeState(false);
+          },
+          error: (err: Error) =>
+            console.error('Observerer ngOnInit got an Error' + err),
         });
         console.log(this.messages);
         this.displayCase = 'delete';
@@ -73,21 +89,32 @@ export class MailViewComponent implements OnInit {
   }
 
   async onFolderSelected(folderNameSelected: string) {
+    this.spinner.changeState(true);
+
     this.currentFolderName = folderNameSelected;
     this.currentFolderNumber = this.folderList.getNumber(folderNameSelected);
-    this.mailList.getMessagesByFolder(this.currentFolderName).subscribe(this.myObserver)
+    this.mailList
+      .getMessagesByFolder(this.currentFolderName)
+      .subscribe(this.myObserver);
     this.mailList.log(folderNameSelected);
   }
 
-  async onQueryChange(query: string){
+  async onQueryChange(query: string) {
+    this.spinner.changeState(true);
+
     this.mailList.getMessagesByFolder(this.currentFolderName).subscribe({
-      next: (data) => this.messages = data,
-      error: (err: Error) => console.error('Observerer ngOnInit got an Error' + err),
-      complete: () => this.messages = this.mailList.getMessagesBySearch(query, this.messages),  
-    })
+      next: (data) => (this.messages = data),
+      error: (err: Error) =>
+        console.error('Observerer ngOnInit got an Error' + err),
+      complete: () => {
+        this.messages = this.mailList.getMessagesBySearch(query, this.messages);
+        this.spinner.changeState(false);
+      },
+    });
   }
 
   onSendEmail(email: any) {
+    this.spinner.changeState(true);
     console.log(email);
     let newMail = {
       to: email.email,
@@ -98,10 +125,14 @@ export class MailViewComponent implements OnInit {
       folder: this.currentFolderName,
     };
     this.messages = [...this.messages, newMail];
-    console.log(newMail)
+    console.log(newMail);
     this.mailList.sendMessages(newMail).subscribe({
-      next: () =>  this.mailList.log(`mail has been post`),
-      error: (err : Error) => console.error('Observerer sendMessage got an Error' + err),
+      next: () => {this.mailList.log(`mail has been post`)
+    this.spinner.changeState(false);
+
+    },
+      error: (err: Error) =>
+        console.error('Observerer sendMessage got an Error' + err),
     });
     console.log(this.messages);
   }
@@ -123,8 +154,8 @@ export class MailViewComponent implements OnInit {
     this.displayCase = 'show';
   }
 
-  onStarEmail(id: number){
-    let mailToStar = (this.messages.filter((message) => message.id === id))[0]
+  onStarEmail(id: number) {
+    let mailToStar = this.messages.filter((message) => message.id === id)[0];
     this.mailList.changeStar(mailToStar);
   }
 }

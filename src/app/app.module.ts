@@ -17,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HighlightMailListDirective } from './directive/highlight-mail-list.directive';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { SearchPanelComponent } from './components/search-panel/search-panel.component';
+import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { SearchPanelComponent } from './components/search-panel/search-panel.com
     HighlightMailListDirective,
     PageNotFoundComponent,
     SearchPanelComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, ReactiveFormsModule],
   providers: [LogService],
