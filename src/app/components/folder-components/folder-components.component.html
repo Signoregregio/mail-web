@@ -1,0 +1,29 @@
+    <nav class="page-left-menu">
+      <section class="compose-toolbar">
+        <button (click)="composeEmail()" class="btn btn-danger">
+          Compose
+        </button>
+      </section>
+
+      <section class="folder-list">
+        <app-folder-list
+          [currentFolderNumber]="currentFolderNumber"
+          [allowCreate]="false"
+          [folderList]="folderService.list"
+          (folderSelected)="onFolderSelected($event)"
+        >
+          <h3 title>Folder list</h3>
+        </app-folder-list>
+      </section>
+
+      <section class="folder-list">
+        <app-folder-list
+          [currentFolderNumber]="currentFolderNumber"
+          [allowCreate]="true"
+          [folderList]="folderService.customList"
+          (folderSelected)="onFolderSelected($event)"
+        >
+          <h3 title>Custom list</h3>
+        </app-folder-list>
+      </section>
+    </nav>

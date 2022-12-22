@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { filter, lastValueFrom, map, Observable } from 'rxjs';
+import { filter, lastValueFrom, map, Observable, Subject } from 'rxjs';
 import { LogService } from './log.service';
 @Injectable()
 export class MailService {
@@ -8,13 +8,10 @@ export class MailService {
 
   mailUrl = 'https://63453f7439ca915a69f9a522.mockapi.io/api/mails';
   messages: any;
+  
 
   log(message: any) {
     this.logService.log(message);
-  }
-
-  getMessages(): Observable<any> {
-    return this.http.get<any>(this.mailUrl);
   }
 
   sendMessages(mail: any) : Observable<any> {

@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnChanges,
+  OnInit,
+  SimpleChange,
+  SimpleChanges,
+} from '@angular/core';
 import { FolderService } from '../services/folder.service';
 import { MailService } from 'src/app/services/mail.service';
 import { TemplateService } from '../services/template.service';
@@ -11,7 +17,7 @@ import { SpinnerStateService } from '../services/spinner-state.service';
   templateUrl: './mail-view.component.html',
   providers: [MailService, FolderService, TemplateService],
 })
-export class MailViewComponent implements OnInit {
+export class MailViewComponent implements OnInit, OnChanges {
   constructor(
     protected folderList: FolderService,
     protected mailList: MailService,
@@ -19,8 +25,11 @@ export class MailViewComponent implements OnInit {
     private route: ActivatedRoute,
     private spinner: SpinnerStateService
   ) {}
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
+    throw new Error('Method not implemented.');
+  }
 
-  messagesLoaded: Promise<boolean>;
   messages: any[];
   currentFolderName = 'inbox';
   currentFolderNumber = 0;
@@ -48,9 +57,7 @@ export class MailViewComponent implements OnInit {
       },
     });
 
-    this.folderList
-      .getCurrentFolderName()
-      .subscribe((data) => (this.currentFolderName = data));
+    this.onChangeFolderObservable();
   }
 
   onBtnMessageViewerPressed(value: string) {
@@ -88,17 +95,6 @@ export class MailViewComponent implements OnInit {
     }
   }
 
-  async onFolderSelected(folderNameSelected: string) {
-    this.spinner.changeState(true);
-
-    this.currentFolderName = folderNameSelected;
-    this.currentFolderNumber = this.folderList.getNumber(folderNameSelected);
-    this.mailList
-      .getMessagesByFolder(this.currentFolderName)
-      .subscribe(this.myObserver);
-    this.mailList.log(folderNameSelected);
-  }
-
   async onQueryChange(query: string) {
     this.spinner.changeState(true);
 
@@ -127,10 +123,10 @@ export class MailViewComponent implements OnInit {
     this.messages = [...this.messages, newMail];
     console.log(newMail);
     this.mailList.sendMessages(newMail).subscribe({
-      next: () => {this.mailList.log(`mail has been post`)
-    this.spinner.changeState(false);
-
-    },
+      next: () => {
+        this.mailList.log(`mail has been post`);
+        this.spinner.changeState(false);
+      },
       error: (err: Error) =>
         console.error('Observerer sendMessage got an Error' + err),
     });
@@ -139,11 +135,6 @@ export class MailViewComponent implements OnInit {
 
   onCancelEmail() {
     this.displayCase = 'none';
-  }
-
-  composeEmail() {
-    this.displayCase = 'newMail';
-    console.log(this.displayCase);
   }
 
   onSelectEmail(index: number) {
@@ -158,4 +149,30 @@ export class MailViewComponent implements OnInit {
     let mailToStar = this.messages.filter((message) => message.id === id)[0];
     this.mailList.changeStar(mailToStar);
   }
+
+  onChangeFolderObservable(){
+    this.folderList.getCurrentFolderName().subscribe({
+      next: (data) => {
+        this.currentFolderName = data;
+        this.mailList.getMessagesByFolder(this.currentFolderName).subscribe({
+          next: (data) => (this.messages = data),
+          error: (err: Error) =>
+            console.error('Observerer ngOnInit got an Error' + err),
+          complete: () => {
+            this.allowPage = true;
+          },
+        })
+      },
+      error: (err: Error) => console.error(err),
+    });
+  }
 }
+
+// this.spinner.changeState(true);
+
+// this.currentFolderName = folderNameSelected;
+// this.currentFolderNumber = this.folderService.getNumber(folderNameSelected);
+// this.mailList
+//   .getMessagesByFolder(this.currentFolderName)
+//   .subscribe(this.myObserver);
+// this.mailList.log(folderNameSelected);
