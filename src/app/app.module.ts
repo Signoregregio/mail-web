@@ -19,6 +19,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { SearchPanelComponent } from './components/search-panel/search-panel.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
+import { PipePipe } from './services/pipe.pipe';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
     SearchPanelComponent,
     LoadingSpinnerComponent,
     CalendarComponent,
+    PipePipe,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, ReactiveFormsModule],
   providers: [LogService],
