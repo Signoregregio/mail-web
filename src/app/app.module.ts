@@ -18,6 +18,7 @@ import { HighlightMailListDirective } from './directive/highlight-mail-list.dire
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { SearchPanelComponent } from './components/search-panel/search-panel.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
     PageNotFoundComponent,
     SearchPanelComponent,
     LoadingSpinnerComponent,
+    CalendarComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, ReactiveFormsModule],
   providers: [LogService],

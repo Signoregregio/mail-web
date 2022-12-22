@@ -20,7 +20,7 @@ export class MessageViewerComponent implements OnInit {
 
 
   constructor() {}
-  
+  //enum
   onBtnPressed (event: any){
     this.btnPressed.emit(event.target.textContent)
   }
