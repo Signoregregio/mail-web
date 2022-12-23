@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DisplayService } from 'src/app/services/display.service';
 import { FolderService } from 'src/app/services/folder.service';
 import { SpinnerStateService } from 'src/app/services/spinner-state.service';
 import { TemplateService } from 'src/app/services/template.service';
@@ -13,7 +14,7 @@ export class FolderComponentsComponent implements OnInit {
   constructor(
     private spinner: SpinnerStateService,
     protected folderService: FolderService,
-    private templateService: TemplateService,
+    private displayService : DisplayService,
   ) {}
   ngOnInit(): void {
   }
@@ -24,7 +25,7 @@ export class FolderComponentsComponent implements OnInit {
   );
 
   composeEmail() {
-    this.templateService.setDisplayCase('newMail')
+    this.displayService.setDisplayCase('newMail')
   }
 
   onFolderSelected(folderNameSelected: string) {

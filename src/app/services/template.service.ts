@@ -4,26 +4,6 @@ import { Subject } from 'rxjs';
 @Injectable()
 export class TemplateService {
   constructor() {}
-
-  private displayCase$ = new Subject();
-  private messageToDisplay$ = new Subject();
-
-  getDisplayCase() {
-    return this.displayCase$.asObservable();
-  }
-
-  setDisplayCase(caseToShow: string) {
-    this.displayCase$.next(caseToShow);
-  }
-  
-  getMessageToDisplay() {
-    return this.displayCase$.asObservable();
-  }
-
-  setMessageToDisplay(newMessage: any) {
-    this.messageToDisplay$.next(newMessage);
-  }
-
   
   getReplyTemplate(message: any) {
     let newTemplate = {

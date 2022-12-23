@@ -1,12 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { DisplayService } from 'src/app/services/display.service';
 
 @Component({
   selector: 'app-mail-composer',
   templateUrl: './mail-composer.component.html',
 })
 export class MailComposerComponent implements OnInit {
-  constructor() {}
+  constructor(private displayService: DisplayService) {}
   @Output()
   sendEmail = new EventEmitter<any>();
 
@@ -23,6 +24,7 @@ export class MailComposerComponent implements OnInit {
   @Input()
   public isForwarding: boolean = false;
 
+  displayCase: string; //reply, forward
   signupForm: FormGroup;
 
   ngOnInit(): void {
@@ -31,6 +33,8 @@ export class MailComposerComponent implements OnInit {
       'email': new FormControl({value : this.newMessage.to, disabled: this.isReplyng}, [Validators.required, Validators.email]),
       'body': new FormControl({value: this.newMessage.body, disabled: this.isForwarding}, [Validators.required, Validators.minLength(1)])
     });
+    this.displayService.getDisplayCase().subscribe((data) => this.displayCase = data )
+    this.displayService.getMessageToDisplay().subscribe((data) => this.newMessage = data )
   }
 
  
