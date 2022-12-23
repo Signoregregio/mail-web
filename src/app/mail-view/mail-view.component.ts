@@ -54,7 +54,6 @@ export class MailViewComponent implements OnInit, OnChanges {
         console.error('Observerer ngOnInit got an Error' + err),
       complete: () => {
         this.allowPage = true;
-        console.log(this.messages);
       },
     });
 
