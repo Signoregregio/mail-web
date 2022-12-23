@@ -1,30 +1,30 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'calendar',
+  name: 'setId'
 })
-export class PipePipe implements PipeTransform {
-  transform(value: any, ccc: number): any {
+export class IdPipe implements PipeTransform {
+
+  transform(value: any, ccc :number): string {
     let dayInMonthBefore = new Date(value.yy, value.mm, 0).getDate();
     let dayInMonth = new Date(value.yy, value.mm + 1, 0).getDate();
 
     if (value.dd && value.dayOfTheWeek === ccc) {
-      return value.dd;
+      return `${value.enum}`;
     }
     //caso sabato primo giorno
     if (value.dayOfTheWeek === 6 && value.dd === 1) {
-      return dayInMonthBefore - (6 - ccc);
+      return `${value.enum - (5 - ccc)}`;
     }
     //caso mese non inizia con domenica
     if (value.dd === 1 && ccc < value.dayOfTheWeek) {
-      return dayInMonthBefore - (value.dayOfTheWeek - 1 - ccc);
+      return `${value.enum - (value.dayOfTheWeek - ccc)}`;
     }
 
     if(value.dd === dayInMonth && ccc > value.dayOfTheWeek){
-      console.log(value)
-      console.log(dayInMonth, ' - ' , value.dd, ' - ', value.dayOfTheWeek, ' - ', ccc)
-      return (ccc - value.dayOfTheWeek)
+      return `${value.enum + (ccc - value.dayOfTheWeek)}`
     }
+    return '';
   }
 
 }

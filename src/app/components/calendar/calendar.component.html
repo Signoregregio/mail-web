@@ -3,6 +3,116 @@
   <span>{{ currentDate | date : "MMM  YYYY" }}</span>
   <button (click)="onSucc()">▶</button>
 </div>
+<form #formMail="ngForm">
+  <span *ngFor="let day of allMonth[currentMonth]">
+    <input
+      type="button"
+      (click)="onDateClick($event); printDate(formMail)"
+      [id]="day | setId : 0"
+      [name]="day | setId : 0"
+      [ngModel]="day | calendar : 0"
+      *ngIf="!!(day | calendar : 0)"
+      [disabled]="+(day | setId : 0) < dateClickedStart"
+      [ngClass]="{
+        'selected-date':
+          +(day | setId : 0) >= dateClickedStart &&
+          +(day | setId : 0) <= dateClickedEnd
+      }"
+    />
+    <input
+      type="button"
+      (click)="onDateClick($event); printDate(formMail)"
+      [id]="day | setId : 1"
+      [name]="day | setId : 1"
+      [ngModel]="day | calendar : 1"
+      *ngIf="!!(day | calendar : 1)"
+      [disabled]="+(day | setId : 1) < dateClickedStart"
+      [ngClass]="{
+        'selected-date':
+          +(day | setId : 1) >= dateClickedStart &&
+          +(day | setId : 1) <= dateClickedEnd
+      }"
+    />
+    <input
+      type="button"
+      (click)="onDateClick($event); printDate(formMail)"
+      [id]="day | setId : 2"
+      [name]="day | setId : 2"
+      [ngModel]="day | calendar : 2"
+      *ngIf="!!(day | calendar : 2)"
+      [disabled]="+(day | setId : 2) < dateClickedStart"
+      [ngClass]="{
+        'selected-date':
+          +(day | setId : 2) >= dateClickedStart &&
+          +(day | setId : 2) <= dateClickedEnd
+      }"
+    />
+    <input
+      type="button"
+      (click)="onDateClick($event); printDate(formMail)"
+      [id]="day | setId : 3"
+      [name]="day | setId : 3"
+      [ngModel]="day | calendar : 3"
+      *ngIf="!!(day | calendar : 3)"
+      [disabled]="+(day | setId : 3) < dateClickedStart"
+      [ngClass]="{
+        'selected-date':
+          +(day | setId : 3) >= dateClickedStart &&
+          +(day | setId : 3) <= dateClickedEnd
+      }"
+    />
+    <input
+      type="button"
+      (click)="onDateClick($event); printDate(formMail)"
+      [id]="day | setId : 4"
+      [name]="day | setId : 4"
+      [ngModel]="day | calendar : 4"
+      *ngIf="!!(day | calendar : 4)"
+      [disabled]="+(day | setId : 4) < dateClickedStart"
+      [ngClass]="{
+        'selected-date':
+          +(day | setId : 4) >= dateClickedStart &&
+          +(day | setId : 4) <= dateClickedEnd
+      }"
+    />
+    <input
+      type="button"
+      (click)="onDateClick($event); printDate(formMail)"
+      [id]="day | setId : 5"
+      [name]="day | setId : 5"
+      [ngModel]="day | calendar : 5"
+      *ngIf="!!(day | calendar : 5)"
+      [disabled]="+(day | setId : 5) < dateClickedStart"
+      [ngClass]="{
+        'selected-date':
+          +(day | setId : 5) >= dateClickedStart &&
+          +(day | setId : 5) <= dateClickedEnd
+      }"
+    />
+    <input
+      type="button"
+      (click)="onDateClick($event); printDate(formMail)"
+      [id]="day | setId : 6"
+      [name]="day | setId : 6"
+      [ngModel]="day | calendar : 6"
+      *ngIf="!!(day | calendar : 6)"
+      [disabled]="+(day | setId : 6) < dateClickedStart"
+      [ngClass]="{
+        'selected-date':
+          +(day | setId : 6) >= dateClickedStart &&
+          +(day | setId : 6) <= dateClickedEnd
+      }"
+    />
+    <div *ngIf="day.dayOfTheWeek === 6"></div>
+  </span>
+</form>
+
+<!-- 
+<div>
+  <button (click)="onPrec()">◀</button>
+  <span>{{ currentDate | date : "MMM  YYYY" }}</span>
+  <button (click)="onSucc()">▶</button>
+</div>
 <form  >
 <span *ngFor="let day of allMonth[currentMonth]">
   <input
@@ -58,4 +168,60 @@
 </span>
 </form>
 
+ -->
 
+<!-- 
+ <form  >
+  <span *ngFor="let day of allMonth[currentMonth]">
+    <input
+    type="button"
+    (click)="onDateClick($event)"
+    [id]="day | setId : 0"
+    [value]="day | calendar : 0"
+    *ngIf="!!(day | calendar : 0)"
+  />
+    <input
+      type="button"
+      (click)="onDateClick($event)"
+      [id]="day | setId : 1 "
+      [value]="day | calendar : 1"
+      *ngIf="!!(day | calendar : 1)"
+    />
+    <input
+      type="button"
+      (click)="onDateClick($event)"
+      [id]="day | setId : 2"
+      [value]="day | calendar : 2"
+      *ngIf="!!(day | calendar : 2)"
+    />
+    <input
+      type="button"
+      (click)="onDateClick($event)"
+      [id]="day | setId : 3"
+      [value]="day | calendar : 3"
+      *ngIf="!!(day | calendar : 3)"
+    />
+    <input
+      type="button"
+      (click)="onDateClick($event)"
+      [id]="day | setId : 4"
+      [value]="day | calendar : 4"
+      *ngIf="!!(day | calendar : 4)"
+    />
+    <input
+      type="button"
+      (click)="onDateClick($event)"
+      [id]="day | setId : 5"
+      [value]="day | calendar : 5"
+      *ngIf="!!(day | calendar : 5)"
+    />
+    <input
+      type="button"
+      (click)="onDateClick($event)"
+      [id]="day | setId : 6"
+      [value]="day | calendar : 6"
+      *ngIf="!!(day | calendar : 6)"
+    />
+    <div *ngIf="day.dayOfTheWeek === 6"></div>
+  </span>
+  </form> -->

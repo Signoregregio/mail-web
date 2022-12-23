@@ -217,3 +217,7 @@ form.ng-invalid {
 	animation-iteration-count: infinite;
 	animation-timing-function: linear;
 }
+
+.selected-date{
+  background-color: #a94442;
+}

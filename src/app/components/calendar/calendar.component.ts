@@ -18,7 +18,7 @@ export class CalendarComponent implements OnInit {
   currentYear = this.date.getFullYear();
   currentMonthReal: number;
   currentDate: Date;
-  
+
   ngOnInit() {
     this.createMonthArray();
     this.getCurrentMonth(this.currentMonth, this.currentYear);
@@ -32,8 +32,8 @@ export class CalendarComponent implements OnInit {
         this.currentMonthReal = value[0].mm;
       }
     });
-    this.currentDate = new Date(this.currentYear, this.currentMonthReal)
-    }
+    this.currentDate = new Date(this.currentYear, this.currentMonthReal);
+  }
 
   createMonthArray() {
     let count = 0;
@@ -67,28 +67,41 @@ export class CalendarComponent implements OnInit {
   onPrec() {
     this.currentMonth -= 1;
     this.currentMonthReal -= 1;
-    this.getCurrentMonth(this.currentMonthReal, this.currentYear)
+    this.getCurrentMonth(this.currentMonthReal, this.currentYear);
   }
   onSucc() {
     this.currentMonth += 1;
     this.currentMonthReal += 1;
-    if(this.currentMonthReal === 12){
+    if (this.currentMonthReal === 12) {
       this.currentYear++;
-      this.currentMonthReal=0;
+      this.currentMonthReal = 0;
     }
-    this.getCurrentMonth(this.currentMonthReal, this.currentYear)
+    this.getCurrentMonth(this.currentMonthReal, this.currentYear);
   }
 
-  isDateClicked : boolean = false;
-  dateClicked: number;
-  onDateClick(formMail : any){
-    console.log(formMail)
-  //   if(!this.isDateClicked){
-  //   this.dateClicked = event.target.id;
-  //   this.isDateClicked = true;
-  // }
-  // if(this.dateClicked){
+  isDateClicked: boolean = false;
+  itsRangeSelected = false;
+  dateClickedStart: number;
+  dateClickedEnd: number;
+  onDateClick(event: any) {
+    if (this.isDateClicked) {
+      this.dateClickedEnd = event.target.id;
+      this.itsRangeSelected = true;
+    }
+    if (!this.isDateClicked) {
+      this.dateClickedStart = event.target.id;
+      this.dateClickedEnd = event.target.id;
+      this.isDateClicked = true;
+    }
+  }
 
-  // }
+  printDate(formMail: any) {
+    if (this.itsRangeSelected) {
+      console.log('%c\nStart:\n',"font-weight: bold; font-size:20px")
+      for (let i = this.dateClickedStart; i <= this.dateClickedEnd; i++) {
+        console.log('Enum :\t' + i + '\nDay Number:\t' + formMail.value[i]);
+      }
+      console.log('%c\nEnd\n\n',"font-weight: bold; font-size:20px");
+    }
   }
 }

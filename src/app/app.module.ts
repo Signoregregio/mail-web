@@ -21,8 +21,9 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { SearchPanelComponent } from './components/search-panel/search-panel.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
-import { PipePipe } from './services/pipe.pipe';
+import { dateNumber } from './pipes/dateNumber';
 import { FolderComponentsComponent } from './components/folder-components/folder-components.component';
+import { IdPipe } from './pipes/id.pipe';
 
 @NgModule({
   declarations: [
@@ -41,8 +42,9 @@ import { FolderComponentsComponent } from './components/folder-components/folder
     SearchPanelComponent,
     LoadingSpinnerComponent,
     CalendarComponent,
-    PipePipe,
+    dateNumber,
     FolderComponentsComponent,
+    IdPipe,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, ReactiveFormsModule],
   providers: [LogService],
