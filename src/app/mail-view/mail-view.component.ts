@@ -54,6 +54,7 @@ export class MailViewComponent implements OnInit, OnChanges {
         console.error('Observerer ngOnInit got an Error' + err),
       complete: () => {
         this.allowPage = true;
+        console.log(this.messages);
       },
     });
 
@@ -78,12 +79,17 @@ export class MailViewComponent implements OnInit, OnChanges {
       case 'Delete':
         this.spinner.changeState(true);
 
-        this.messages.splice(this.mailToShow.index, 1);
-        this.mailList.mailDelete(this.mailToShow.index).subscribe({
+        this.messages.splice(this.mailToShow.id, 1);
+        this.mailList.mailDelete(this.mailToShow.id).subscribe({
           next: () => {
             this.mailList.log(
               `mail with id ${this.mailToShow.id} has been removed from the mock correctly`
             );
+
+            this.mailList
+              .getMessagesByFolder(this.currentFolderName)
+              .subscribe(this.myObserver);
+
             this.spinner.changeState(false);
           },
           error: (err: Error) =>
@@ -96,6 +102,7 @@ export class MailViewComponent implements OnInit, OnChanges {
   }
 
   async onQueryChange(query: string) {
+    console.log(query);
     this.spinner.changeState(true);
 
     this.mailList.getMessagesByFolder(this.currentFolderName).subscribe({
@@ -150,7 +157,7 @@ export class MailViewComponent implements OnInit, OnChanges {
     this.mailList.changeStar(mailToStar);
   }
 
-  onChangeFolderObservable(){
+  onChangeFolderObservable() {
     this.folderList.getCurrentFolderName().subscribe({
       next: (data) => {
         this.currentFolderName = data;
@@ -161,7 +168,7 @@ export class MailViewComponent implements OnInit, OnChanges {
           complete: () => {
             this.allowPage = true;
           },
-        })
+        });
       },
       error: (err: Error) => console.error(err),
     });

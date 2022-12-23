@@ -34,9 +34,11 @@ export class MailService {
   }
 
   getMessagesBySearch(query: string, messages: any) {
-    console.log('query is: ' + query);
-    messages = messages.filter((mail: any) =>
-      mail.subject.toLowerCase().includes(query.toLowerCase())
+    //TODO replace this with a call to MessageSearchService.searchMessages(query)
+    console.log(query);
+    console.log(messages.length);
+    messages = messages.filter((mail: any) =>{if(mail.subject === undefined){return true}
+      return mail.subject.toLowerCase().includes(query.toLowerCase())}
     );
     console.log(
       'Sono presenti in questa query :\n\t\t\t\t\t' +
