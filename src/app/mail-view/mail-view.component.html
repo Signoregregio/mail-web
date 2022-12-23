@@ -1,4 +1,3 @@
-<div *ngIf="allowPage">
   <div class="page-container">
     <header class="horizontal-container">
       <app-mail-logo></app-mail-logo>
@@ -20,12 +19,16 @@
       <app-folder-components></app-folder-components>
       
       <section class="horizontal-center vertical-container">
+<div *ngIf="allowPage">
+
         <app-message-list
           [messages]="messages"
           (selectEmail)="onSelectEmail($event)"
           (starEmail)="onStarEmail($event)"
         >
         </app-message-list>
+</div>
+
         <div class="spacer">
           <hr />
         </div>
@@ -66,4 +69,3 @@
       <br />
     </footer>
   </div>
-</div>
