@@ -37,6 +37,10 @@ section {
   /* border: 1px solid blue; */
 }
 
+.calendar {
+  margin: 30px 0px 20px 20px;
+}
+
 header {
   background-color: lightblue;
   padding: 5px;

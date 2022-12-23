@@ -20,6 +20,8 @@ import { MailVoidComponent } from './components/mail-void/mail-void.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { SearchPanelComponent } from './components/search-panel/search-panel.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
+import { PipePipe } from './services/pipe.pipe';
 import { FolderComponentsComponent } from './components/folder-components/folder-components.component';
 
 @NgModule({
@@ -38,14 +40,9 @@ import { FolderComponentsComponent } from './components/folder-components/folder
     PageNotFoundComponent,
     SearchPanelComponent,
     LoadingSpinnerComponent,
+    CalendarComponent,
+    PipePipe,
     FolderComponentsComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
-    ReactiveFormsModule,
   ],
   providers: [LogService],
   bootstrap: [AppComponent],
