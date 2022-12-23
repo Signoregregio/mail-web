@@ -9,24 +9,22 @@ export class PipePipe implements PipeTransform {
     let dayInMonth = new Date(value.yy, value.mm + 1, 0).getDate();
 
     if (value.dd && value.dayOfTheWeek === ccc) {
-      console.log(value.dd)
       return value.dd;
     }
-    //caso domenica primo giorno
-    if (value.dayOfTheWeek === 0 && value.dd === 1) {
-      console.log(ccc + ' - ' + value.dayOfTheWeek);
+    //caso sabato primo giorno
+    if (value.dayOfTheWeek === 6 && value.dd === 1) {
       return dayInMonthBefore - (6 - ccc);
     }
-    //caso mese non inizia con Lunedì e non Domenica
-    if (value.dd === 1 && ccc < value.dayOfTheWeek && ccc > 0) {
+    //caso mese non inizia con domenica
+    if (value.dd === 1 && ccc < value.dayOfTheWeek) {
       return dayInMonthBefore - (value.dayOfTheWeek - 1 - ccc);
     }
 
-    // if (value.dd === dayInMonth) {
-    //   console.log(value.dd + '-' + ccc + '-' + value.dayOfTheWeek);
-    //   return ccc - value.dayOfTheWeek;
-    // }
+    if(value.dd === dayInMonth && ccc > value.dayOfTheWeek){
+      console.log(value)
+      console.log(dayInMonth, ' - ' , value.dd, ' - ', value.dayOfTheWeek, ' - ', ccc)
+      return (ccc - value.dayOfTheWeek)
+    }
   }
 
-  // caso mese finisce  non di Domenica
 }

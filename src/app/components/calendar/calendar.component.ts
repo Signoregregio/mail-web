@@ -36,6 +36,7 @@ export class CalendarComponent implements OnInit {
     }
 
   createMonthArray() {
+    let count = 0;
     this.allMonth = [];
     let monthNumber: number = 0;
     let year = this.currentYear - 1;
@@ -49,6 +50,7 @@ export class CalendarComponent implements OnInit {
           mm: monthNumber,
           yy: year,
           dayOfTheWeek: dayOfTheWeek,
+          enum: count++,
         };
         monthArray.push(day);
       }
@@ -75,5 +77,18 @@ export class CalendarComponent implements OnInit {
       this.currentMonthReal=0;
     }
     this.getCurrentMonth(this.currentMonthReal, this.currentYear)
+  }
+
+  isDateClicked : boolean = false;
+  dateClicked: number;
+  onDateClick(formMail : any){
+    console.log(formMail)
+  //   if(!this.isDateClicked){
+  //   this.dateClicked = event.target.id;
+  //   this.isDateClicked = true;
+  // }
+  // if(this.dateClicked){
+
+  // }
   }
 }

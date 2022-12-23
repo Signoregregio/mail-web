@@ -44,6 +44,7 @@ import { FolderComponentsComponent } from './components/folder-components/folder
     PipePipe,
     FolderComponentsComponent,
   ],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, ReactiveFormsModule],
   providers: [LogService],
   bootstrap: [AppComponent],
 })

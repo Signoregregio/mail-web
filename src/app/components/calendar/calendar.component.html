@@ -1,16 +1,61 @@
 <div>
-
-    <button (click)="onPrec()"> ◀ </button> 
-    <span>{{ currentDate | date:'MMM  YYYY'}}</span>
-    <button (click)="onSucc()"> ▶ </button>
+  <button (click)="onPrec()">◀</button>
+  <span>{{ currentDate | date : "MMM  YYYY" }}</span>
+  <button (click)="onSucc()">▶</button>
 </div>
-  <span *ngFor="let day of allMonth[currentMonth]">
-        <span > {{ day | calendar: 1 }}  </span>
-        <span > {{ day | calendar: 2 }}  </span>
-        <span >  {{ day | calendar: 3 }}  </span>
-        <span > {{ day | calendar: 4 }}  </span>
-        <span > {{ day | calendar: 5 }}  </span>
-        <span > {{ day | calendar: 6 }}  </span>
-        <span > {{ day | calendar: 0 }}  </span>
-    <div *ngIf="day.dayOfTheWeek === 0" > </div>
-  </span>
+<form  >
+<span *ngFor="let day of allMonth[currentMonth]">
+  <input
+  type="button"
+  (click)="onDateClick($event)"
+  [id]="day.enum"
+  [value]="day | calendar : 0"
+  *ngIf="!!(day | calendar : 0)"
+/>
+  <input
+    type="button"
+    (click)="onDateClick($event)"
+    [id]="day.enum"
+    [value]="day | calendar : 1"
+    *ngIf="!!(day | calendar : 1)"
+  />
+  <input
+    type="button"
+    (click)="onDateClick($event)"
+    [id]="day.enum"
+    [value]="day | calendar : 2"
+    *ngIf="!!(day | calendar : 2)"
+  />
+  <input
+    type="button"
+    (click)="onDateClick($event)"
+    [id]="day.enum"
+    [value]="day | calendar : 3"
+    *ngIf="!!(day | calendar : 3)"
+  />
+  <input
+    type="button"
+    (click)="onDateClick($event)"
+    [id]="day.enum"
+    [value]="day | calendar : 4"
+    *ngIf="!!(day | calendar : 4)"
+  />
+  <input
+    type="button"
+    (click)="onDateClick($event)"
+    [id]="day.enum"
+    [value]="day | calendar : 5"
+    *ngIf="!!(day | calendar : 5)"
+  />
+  <input
+    type="button"
+    (click)="onDateClick($event)"
+    [id]="day.enum"
+    [value]="day | calendar : 6"
+    *ngIf="!!(day | calendar : 6)"
+  />
+  <div *ngIf="day.dayOfTheWeek === 6"></div>
+</span>
+</form>
+
+

@@ -33,8 +33,8 @@ export class MailComposerComponent implements OnInit {
       'email': new FormControl({value : this.newMessage.to, disabled: this.isReplyng}, [Validators.required, Validators.email]),
       'body': new FormControl({value: this.newMessage.body, disabled: this.isForwarding}, [Validators.required, Validators.minLength(1)])
     });
-    this.displayService.getDisplayCase().subscribe((data) => this.displayCase = data )
-    this.displayService.getMessageToDisplay().subscribe((data) => this.newMessage = data )
+    // this.displayService.getDisplayCase().subscribe((data) => this.displayCase = data )
+    // this.displayService.getMessageToDisplay().subscribe((data) => this.newMessage = data )
   }
 
  
